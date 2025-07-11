@@ -5,11 +5,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // Defines the User controller, extending CodeIgniter's base controller
 class User extends CI_Controller {
 
-    // Constructor: loads the User_model
-    public function __construct() {
-        parent::__construct();
-        $this->load->model('User_model');
-    }
+    // // Constructor: loads the User_model
+    // public function __construct() {
+    //     parent::__construct();
+    //     $this->load->model('User_model');
+    // } /// i have added this file into autoload file
     
     // Displays the list of users
     public function index() {
@@ -37,7 +37,15 @@ class User extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('users/create');
         } else {
-            $data = $this->input->post();
+            // $data = $this->input->post(); // insted of this we can also create using associative array
+            $data = [
+                'name'    => $this->input->post('name'),
+                'email'   => $this->input->post('email'),
+                'phone'   => $this->input->post('phone'),
+                'address' => $this->input->post('address'),
+                'gender'  => $this->input->post('gender'),
+                'dob'     => $this->input->post('dob')
+            ];
             $this->User_model->insert_user($data);
             redirect('user');
         }
