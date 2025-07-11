@@ -1,6 +1,16 @@
 <style>
-    body { font-family: Arial, sans-serif;
-    display: flex; justify-content: center; align-items: center; height: 100vh; }
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body { 
+        font-family: Arial, sans-serif;
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh;
+    }
     h2 { margin-bottom: 20px; }
     form {
         max-width: 400px;
@@ -38,6 +48,7 @@
     }
     form p{
         color: red;
+        font-size: 11px;
     }
 </style>
 <section>
@@ -49,7 +60,7 @@
     <label>Email:</label>
     <input type="email" name="email" value="<?= set_value('email', $user['email']) ?>">
     <?php echo form_error('email'); ?>
-    <label>Phone:</label>
+    <label>Phone:</label>   
     <input type="text" name="phone" value="<?= set_value('phone', $user['phone']) ?>">
     <?php echo form_error('phone'); ?>
     <label>Address:</label>

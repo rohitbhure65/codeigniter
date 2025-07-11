@@ -1,6 +1,16 @@
 <style>
-    body { font-family: Arial, sans-serif;
-    display: flex; justify-content: center; align-items: center; height: 100vh; }
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body { 
+        font-family: Arial, sans-serif;
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        height: 100vh;
+    }
     h2 { margin-bottom: 20px; }
     form {
         max-width: 400px;
@@ -38,6 +48,7 @@
     }
     form p{
         color: red;
+        font-size: 13px;
     }
 </style>
 <section>
