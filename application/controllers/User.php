@@ -10,7 +10,7 @@ class User extends CI_Controller {
         parent::__construct();
         $this->load->model('User_model');
     }
-
+    
     // Displays the list of users
     public function index() {
         $data['users'] = $this->User_model->get_all_users();
@@ -55,8 +55,8 @@ class User extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->helper('form');
         $this->form_validation->set_rules('name', 'Name', 'required|min_length[3]');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
-        $this->form_validation->set_rules('phone', 'Phone', 'required|numeric|is_unique[users.phone]|min_length[10]|max_length[10]');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('phone', 'Phone', 'required|numeric|min_length[10]|max_length[10]');
         $this->form_validation->set_rules('address', 'Address', 'required');
         $this->form_validation->set_rules('gender', 'Gender', 'required');
         $this->form_validation->set_rules('dob', 'DOB', 'required');

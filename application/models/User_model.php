@@ -10,7 +10,7 @@ class User_model extends CI_Model {
     public function insert_user($data) {
         return $this->db->insert('users', $data);
     }
-
+    
     public function get_user($id) {
         return $this->db->get_where('users', ['id' => $id])->row_array();
     }
