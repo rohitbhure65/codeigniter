@@ -37,7 +37,7 @@
 <table>
     <tr>
         <th>Name</th><th>Email</th><th>Phone</th><th>Address</th>
-        <th>Gender</th><th>DOB</th><th>Actions</th>
+        <th>Gender</th><th>ROLE</th><th>DOB</th><th>Actions</th>
     </tr>
     <?php foreach ($users as $user): ?>
     <tr>
@@ -46,11 +46,12 @@
         <td><?= $user['phone'] ?></td>  
         <td><?= $user['address'] ?></td>
         <td><?= $user['gender'] ?></td>
+        <td><?= $user['role'] ?></td>
         <td><?= $user['dob'] ?></td>
         <td class="actions">
             <a href="<?= base_url('user/edit/'.$user['id']) ?>">Edit</a> |
             <a href="<?= base_url('user/delete/'.$user['id']) ?>" onclick="return confirm('Are you sure?')">Delete</a>
-        </td>
+        </td>   
     </tr>
     <?php endforeach; ?>
 </table>

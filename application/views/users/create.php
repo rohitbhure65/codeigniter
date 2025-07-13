@@ -68,9 +68,9 @@
     <?php echo form_error('address'); ?>
     <label>Gender:</label>
     <select name="gender">
-        <option value="Male" <?= set_value('gender') == 'Male' ? 'selected' : '' ?>>Male</option>
-        <option value="Female" <?= set_value('gender') == 'Female' ? 'selected' : '' ?>>Female</option>
-        <option value="Other" <?= set_value('gender') == 'Other' ? 'selected' : '' ?>>Other</option>
+        <option value="1" <?= set_value('gender') == 1 ? 'selected' : '' ?>>Male</option>
+        <option value="2" <?= set_value('gender') == 2 ? 'selected' : '' ?>>Female</option>
+        <option value="3" <?= set_value('gender') == 3 ? 'selected' : '' ?>>Other</option>
     </select>
     <?php echo form_error('gender'); ?>
     <label>DOB:</label>
