@@ -9,7 +9,7 @@
         align-items: center;
         text-align: center;
         margin: 20px;
-        color: red; 
+        color: red;
     }
     a.button {
         background: #007bff;
@@ -48,23 +48,40 @@
     <table>
         <tr>
             <th>Name</th><th>Roll no</th><th>section</th><th>Class</th><th>Email</th><th>Phone</th><th>Address</th>
-        <th>Gender</th><th>DOB</th><th>Actions</th>
+        <th>Gender</th><th>DOB</th><th>Marks</th>
     </tr>
     <?php foreach ($users as $user): ?>
     <tr>
-        <td><?= $user['name'] ?></td>
-        <td><?= $user['roll_no'] ?></td>
-        <td><?= $user['section'] ?></td>
-        <td><?= $user['class'] ?></td>
-        <td><?= $user['email'] ?></td>
-        <td><?= $user['phone'] ?></td>  
-        <td><?= $user['address'] ?></td>
-        <td><?= $user['gender'] ?></td>
-        <td><?= $user['dob'] ?></td>
-        <td class="actions">
-            <a href="<?= base_url('user/edit/'.$user['id']) ?>">Edit</a> |
-            <a href="<?= base_url('user/delete/'.$user['id']) ?>" onclick="return confirm('Are you sure?')">Delete</a>
-        </td>   
+        <td><?= $user["name"] ?></td>
+        <td><?= $user["roll_no"] ?></td>
+        <td><?= $user["section"] ?></td>
+        <td><?= $user["class"] ?></td>
+        <td><?= $user["email"] ?></td>
+        <td><?= $user["phone"] ?></td>
+        <td><?= $user["address"] ?></td>
+        <td><?= $user["gender"] ?></td>
+        <td><?= $user["dob"] ?></td>
+        <td>
+            <?php if (
+            	!empty($user["marks"]) &&
+            	!empty($user["subject_name"])
+            ): ?>
+                <ul>
+                    <li><?= $user["subject_name"] ?> - <?= $user[
+ 	"marks"
+ ] ?></li>
+                </ul>
+            <?php elseif (
+            	!empty($user["subject_name"]) &&
+            	empty($user["marks"])
+            ): ?>
+                <ul>
+                    <li><?= $user["subject_name"] ?> - No marks</li>
+                </ul>
+            <?php else: ?>
+                <span style="color: #888;">No subjects/marks assigned</span>
+            <?php endif; ?>
+        </td>
     </tr>
     <?php endforeach; ?>
 </table>

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class User_model extends CI_Model {
 
     public function get_all_users() {
-        $this->db->select('users.*,students.*');
+        $this->db->select('users.*,students.*,students.class, students.section, subjects.name AS subject_name,marks.marks');
         $this->db->from('users');
         $this->db->join('students', 'users.id = students.user_id', 'left');
         $this->db->join('marks', 'users.id = marks.student_id', 'left');
