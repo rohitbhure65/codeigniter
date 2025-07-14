@@ -4,8 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class User_model extends CI_Model {
 
     public function get_all_users() {
-        return $this->db->get('users')->result_array();
-    }
+        $this->db->select('users.*,students.*');
+        $this->db->from('users');
+        $this->db->join('students', 'users.id = students.user_id', 'left');
+        $this->db->join('marks', 'users.id = marks.student_id', 'left');
+        $this->db->join('subjects', 'marks.subject_id = subjects.id', 'left');
+        $this->db->where('users.role', 'student');
+        $query = $this->db->get();
+        return $query->result_array();
+    }   
 
     public function insert_user($data) {
         return $this->db->insert('users', $data);

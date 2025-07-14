@@ -1,6 +1,16 @@
 <style>
     body { font-family: Arial, sans-serif; }
     h2 { margin-bottom: 20px; }
+    .homepageh1{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: 20px;
+        color: red; 
+    }
     a.button {
         background: #007bff;
         color: #fff !important;
@@ -32,21 +42,24 @@
     }
     .actions a:last-child { margin-right: 0; }
 </style>
-<h2>User List</h2>
-<a href="<?= site_url('user/create') ?>" class="button">Add New</a>
-<table>
-    <tr>
-        <th>Name</th><th>Email</th><th>Phone</th><th>Address</th>
-        <th>Gender</th><th>ROLE</th><th>DOB</th><th>Actions</th>
+<div class="homepageh1">
+
+    <h1>Student List</h1>
+    <table>
+        <tr>
+            <th>Name</th><th>Roll no</th><th>section</th><th>Class</th><th>Email</th><th>Phone</th><th>Address</th>
+        <th>Gender</th><th>DOB</th><th>Actions</th>
     </tr>
     <?php foreach ($users as $user): ?>
     <tr>
         <td><?= $user['name'] ?></td>
+        <td><?= $user['roll_no'] ?></td>
+        <td><?= $user['section'] ?></td>
+        <td><?= $user['class'] ?></td>
         <td><?= $user['email'] ?></td>
         <td><?= $user['phone'] ?></td>  
         <td><?= $user['address'] ?></td>
         <td><?= $user['gender'] ?></td>
-        <td><?= $user['role'] ?></td>
         <td><?= $user['dob'] ?></td>
         <td class="actions">
             <a href="<?= base_url('user/edit/'.$user['id']) ?>">Edit</a> |
@@ -55,3 +68,4 @@
     </tr>
     <?php endforeach; ?>
 </table>
+</div>

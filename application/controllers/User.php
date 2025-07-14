@@ -5,12 +5,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // Defines the User controller, extending CodeIgniter's base controller
 class User extends CI_Controller {
 
-    // // Constructor: loads the User_model
-    // public function __construct() {
-    //     parent::__construct();
-    //     $this->load->model('User_model');
-    // } /// i have added this file into autoload file
-    
     // Displays the list of users
     public function index() {
         $data['users'] = $this->User_model->get_all_users();
@@ -28,6 +22,8 @@ class User extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->helper('form');
         $this->form_validation->set_rules('name', 'Name', 'required|min_length[3]');
+        $this->form_validation->set_rules('uname', 'Uname', 'required|min_length[5]|max_length[12]|is_unique[users.uname');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
         $this->form_validation->set_rules('phone', 'Phone', 'required|numeric|is_unique[users.phone]|min_length[10]|max_length[10]');
         $this->form_validation->set_rules('address', 'Address', 'required');
