@@ -9,7 +9,7 @@ class User_model extends CI_Model {
         $this->db->join('students', 'users.id = students.user_id', 'left');
         $this->db->join('marks', 'users.id = marks.student_id', 'left');
         $this->db->join('subjects', 'marks.subject_id = subjects.id', 'left');
-        $this->db->where('users.role', 'student');
+        $this->db->where('users.role', 'student' );
         $query = $this->db->get();
         return $query->result_array();
     }   

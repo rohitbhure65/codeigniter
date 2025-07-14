@@ -118,11 +118,4 @@ class User extends CI_Controller
 		$this->User_model->delete_user($id);
 		redirect("user");
 	}
-
-	// Debug method to troubleshoot marks display issues
-	public function debug()
-	{
-		$data["users"] = $this->User_model->get_all_users();
-		$this->load->view("users/debug", $data);
-	}
 }
