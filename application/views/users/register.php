@@ -90,10 +90,20 @@
         font-size: 12px;
         margin-bottom: 8px;
         margin-top: -10px;
+        background: #ffeaea;
+        padding: 6px 8px;
+        border-radius: 4px;
+        border-left: 3px solid #e63946;
+        font-weight: 500;
     }
     select {
         appearance: none;
         background: #f8f8fa url('data:image/svg+xml;utf8,<svg fill="gray" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 9px center/16px 16px;
+    }
+    .error-input {
+        border-color: #e63946 !important;
+        background: #ffeaea !important;
+        box-shadow: 0 0 0 2px #ffeaea !important;
     }
 </style>
 <section>
@@ -102,38 +112,52 @@
     <label>Name:</label>
     <input type="text" name="name" value="<?= isset($form_data["name"])
     	? $form_data["name"]
-    	: "" ?>">
+    	: "" ?>" class="<?= isset($validation_errors["name"])
+	? "error-input"
+	: "" ?>">
     <?php if (isset($validation_errors["name"])): ?>
         <p><?= $validation_errors["name"] ?></p>
     <?php endif; ?>
     <label>Email:</label>
     <input type="email" name="email" value="<?= isset($form_data["email"])
     	? $form_data["email"]
-    	: "" ?>">
+    	: "" ?>" class="<?= isset($validation_errors["email"])
+	? "error-input"
+	: "" ?>">
     <?php if (isset($validation_errors["email"])): ?>
         <p><?= $validation_errors["email"] ?></p>
     <?php endif; ?>
     <label>Password:</label>
-    <input type="password" name="password" value="">
+    <input type="password" name="password" value="" class="<?= isset(
+    	$validation_errors["password"]
+    )
+    	? "error-input"
+    	: "" ?>">
     <?php if (isset($validation_errors["password"])): ?>
         <p><?= $validation_errors["password"] ?></p>
     <?php endif; ?>
     <label>Phone:</label>
     <input type="text" name="phone" value="<?= isset($form_data["phone"])
     	? $form_data["phone"]
-    	: "" ?>">
+    	: "" ?>" class="<?= isset($validation_errors["phone"])
+	? "error-input"
+	: "" ?>">
     <?php if (isset($validation_errors["phone"])): ?>
         <p><?= $validation_errors["phone"] ?></p>
     <?php endif; ?>
     <label>Address:</label>
-    <textarea name="address"><?= isset($form_data["address"])
-    	? $form_data["address"]
-    	: "" ?></textarea>
+    <textarea name="address" class="<?= isset($validation_errors["address"])
+    	? "error-input"
+    	: "" ?>"><?= isset($form_data["address"])
+	? $form_data["address"]
+	: "" ?></textarea>
     <?php if (isset($validation_errors["address"])): ?>
         <p><?= $validation_errors["address"] ?></p>
     <?php endif; ?>
     <label>Gender:</label>
-    <select name="gender">
+    <select name="gender" class="<?= isset($validation_errors["gender"])
+    	? "error-input"
+    	: "" ?>">
         <option value="">Select Gender</option>
         <option value="1" <?= isset($form_data["gender"]) &&
         $form_data["gender"] == 1
@@ -148,7 +172,9 @@
         <p><?= $validation_errors["gender"] ?></p>
     <?php endif; ?>
     <label>Role:</label>
-    <select name="role">
+    <select name="role" class="<?= isset($validation_errors["role"])
+    	? "error-input"
+    	: "" ?>">
         <option value="">Select Role</option>
         <option value="1" <?= isset($form_data["role"]) &&
         $form_data["role"] == 1
@@ -165,7 +191,9 @@
     <label>DOB:</label>
     <input type="date" name="dob" value="<?= isset($form_data["dob"])
     	? $form_data["dob"]
-    	: "" ?>">
+    	: "" ?>" class="<?= isset($validation_errors["dob"])
+	? "error-input"
+	: "" ?>">
     <?php if (isset($validation_errors["dob"])): ?>
         <p><?= $validation_errors["dob"] ?></p>
     <?php endif; ?>
