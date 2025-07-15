@@ -45,6 +45,7 @@ class User extends CI_Controller
 			"required|numeric|is_unique[users.phone]|min_length[10]|max_length[10]"
 		);
 		$this->form_validation->set_rules("address", "Address", "required");
+		$this->form_validation->set_rules("role", "Role", "required");
 		$this->form_validation->set_rules("gender", "Gender", "required");
 		$this->form_validation->set_rules("dob", "DOB", "required");
 
@@ -58,9 +59,16 @@ class User extends CI_Controller
 				"password" => password_hash($this->input->post("password"), PASSWORD_BCRYPT),
 				"phone" => $this->input->post("phone"),
 				"address" => $this->input->post("address"),
+				"role" => $this->input->post("role"),
 				"gender" => $this->input->post("gender"),
 				"dob" => $this->input->post("dob"),
 			];
+			$newdata = array(
+        		'username'  => $this->input->post("name"),
+        		'email'     => $this->input->post("email"),
+				'role' => $this->input->post("role"),
+        		'logged_in' => TRUE
+);
 			$this->User_model->insert_user($data);
 			redirect("user");
 		}

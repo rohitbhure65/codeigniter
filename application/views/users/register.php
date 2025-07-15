@@ -118,8 +118,8 @@
     <?php echo form_error('gender'); ?>
     <label>Role:</label>
     <select name="role">
-        <option value="student" <?= set_value('gender') == 1 ? 'selected' : '' ?>>Student</option>
-        <option value="teacher" <?= set_value('gender') == 2 ? 'selected' : '' ?>>Teacher</option>
+        <option value="1" <?= set_value('role') == 1 ? 'selected' : '' ?>>Student</option>
+        <option value="2" <?= set_value('role') == 2 ? 'selected' : '' ?>>Teacher</option>
     </select>
     <?php echo form_error('role'); ?>
     <label>DOB:</label>
