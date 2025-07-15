@@ -91,7 +91,7 @@
 
 	<div class="butt" style="justify-content: center; align-items: center; flex-wrap: wrap;">
 
-    <table class="p-10 m-20">
+    <table class="p-20 m-20">
             <thead>
                 <tr>
                     <th>Name</th>
