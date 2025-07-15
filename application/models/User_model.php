@@ -6,23 +6,29 @@ class User_model extends CI_Model
 	public function get_all_users()
 	{
 		$sql = "
-    SELECT
-    u.name AS student_name,
-    u.email,
-    u.phone,
-    u.address,
-    u.gender,
-    u.dob,
-    st.*,
-    MAX(CASE WHEN s.name = 'SCIENCE' THEN m.marks END) AS science_marks,
-    MAX(CASE WHEN s.name = 'ENGLISH' THEN m.marks END) AS english_marks
-FROM marks m
-JOIN students st ON m.student_id
-JOIN users u ON st.user_id
-JOIN subjects s ON m.subject_id
-GROUP BY st.id, u.name, u.email, u.phone, u.address,u.gender, u.dob, st.section;
+			SELECT
+			u.id as user_id,
+			u.name AS student_name,
+			u.email,
+			u.phone,
+			u.address,
+			u.gender,
+			u.dob,
+			st.id as student_id,
+			st.roll_no,
+			st.section,
+			st.class,
+			GROUP_CONCAT(
+				CONCAT(s.name, ':', m.marks)
+				ORDER BY s.name SEPARATOR '|'
+			) AS all_marks
+		FROM users u
+		JOIN students st ON u.id = st.user_id
+		LEFT JOIN marks m ON st.id = m.student_id
+		LEFT JOIN subjects s ON m.subject_id = s.id
+		GROUP BY u.id, st.id
+		ORDER BY u.id, st.id
     ";
-
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}

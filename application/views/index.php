@@ -90,7 +90,7 @@
     <?php endif; ?>
 
 	<div class="butt" style="justify-content: center; align-items: center; flex-wrap: wrap;">
-
+    <div class="p-2 m-2 text-3xl font-black">STUDENT LIST</div>
     <table class="p-20 m-20">
             <thead>
                 <tr>
@@ -103,7 +103,7 @@
                     <th>Address</th>
                     <th>Gender</th>
                     <th>DOB</th>
-                    <th>Marks</th>
+                   
                 </tr>
             </thead>
             <tbody>
@@ -118,44 +118,7 @@
                         <td><?= $user["address"] ?></td>
                         <td><?= $user["gender"] ?></td>
                         <td><?= $user["dob"] ?></td>
-                        <td>
-                            <?php
-                            $has_marks = false;
-                            $subjects = [
-                                "science_marks",
-                                "english_marks",
-                                "math_marks",
-                            ];
-                            foreach ($subjects as $subject) {
-                                if (!empty($user[$subject])) {
-                                    $has_marks = true;
-                                    break;
-                                }
-                            }
-                            ?>
-
-                            <?php if ($has_marks): ?>
-                                <ul>
-                                    <?php if (!empty($user["science_marks"])): ?>
-                                        <li>Science - <?= $user[
-                                            "science_marks"
-                                        ] ?></li>
-                                    <?php endif; ?>
-                                    <?php if (!empty($user["english_marks"])): ?>
-                                        <li>English - <?= $user[
-                                            "english_marks"
-                                        ] ?></li>
-                                    <?php endif; ?>
-                                    <?php if (!empty($user["math_marks"])): ?>
-                                        <li>Mathematics - <?= $user[
-                                            "math_marks"
-                                        ] ?></li>
-                                    <?php endif; ?>
-                                </ul>
-                            <?php else: ?>
-                                <span style="color: #888;">No subjects/marks assigned</span>
-                            <?php endif; ?>
-                        </td>
+                      
                     </tr>
                 <?php endforeach; ?>
             </tbody>
