@@ -67,10 +67,41 @@ class User extends CI_Controller
         		'username'  => $this->input->post("name"),
         		'email'     => $this->input->post("email"),
 				'role' => $this->input->post("role"),
-        		'logged_in' => TRUE
-);
+			);
+			$this->session->set_userdata($newdata);
+			
+
 			$this->User_model->insert_user($data);
 			redirect("user");
+		}
+	}
+
+	public function login()
+	{
+		$this->load->helper("form");
+		$this->load->view("users/login");
+	}
+
+	public function auth()
+	{
+		$this->load->library("form_validation");
+		$this->load->helper("form");
+		$this->form_validation->set_rules(
+			"email",
+			"Email",
+			"required|valid_email"
+		);
+		$this->form_validation->set_rules(
+			"password",
+			"Password",
+			"required|min_length[8]|trim"
+		);
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view("users/login");
+		} else {
+		
+			
 		}
 	}
 
@@ -122,4 +153,10 @@ class User extends CI_Controller
 		$this->User_model->delete_user($id);
 		redirect("user");
 	}
+
+	public function logout() {
+    $this->session->sess_destroy();
+    redirect('user/index');
+}
+
 }
