@@ -77,7 +77,7 @@ class User extends CI_Controller
 
 		// Verify password
 		if (!password_verify($password, $user->password)) {
-			$data["validation_errors"] = ["password" => "Incorrect password"];
+			$data["validation_errors"] = ["password" => "Invalid Credentials"];
 			$data["email"] = $email;
 			$this->load->view("login", $data);
 			return;

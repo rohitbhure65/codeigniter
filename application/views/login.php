@@ -13,6 +13,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 100vw;
         height: 100vh;
     }
     section {
@@ -39,7 +40,6 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-
         justify-content: flex-start;
     }
     label {
@@ -109,7 +109,6 @@
         box-shadow: 0 0 0 2px #ffeaea !important;
     }
 </style>
-<?php $this->load->view("includes/header.php"); ?>
 <section>
     <h2>Login</h2>
     <form action="<?= site_url("auth") ?>" method="post">
