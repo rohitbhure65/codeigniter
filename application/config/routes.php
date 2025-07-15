@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined("BASEPATH") or exit("No direct script access allowed");
 
 /*
 | -------------------------------------------------------------------------
@@ -49,15 +49,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'user';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route["default_controller"] = "user";
+$route["404_override"] = "";
+$route["translate_uri_dashes"] = false;
 
-$route['user'] = 'user/index';
-$route['user/register'] = 'user/register';
-$route['user/login'] = 'user/login';
-$route['user/store'] = 'user/store';
-$route['user/edit/(:num)'] = 'user/edit/$1';
-$route['user/update/(:num)'] = 'user/update/$1';
-$route['user/delete/(:num)'] = 'user/delete/$1';
-$route['user/logout'] = 'user/logout';
+$route["index"] = "user/index";
+
+// Authentication routes
+$route["register"] = "user/register";
+$route["login"] = "user/login";
+$route["logout"] = "user/logout";
+$route["auth"] = "user/auth";
+
+// User management routes
+$route["store"] = "user/store";
+$route["edit/(:num)"] = 'user/edit/$1';
+$route["update/(:num)"] = 'user/update/$1';
+$route["delete/(:num)"] = 'user/delete/$1';     

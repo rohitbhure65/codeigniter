@@ -6,7 +6,7 @@ class User_model extends CI_Model
 	public function get_all_users()
 	{
 		$sql = "
-    SELECT 
+    SELECT
     u.name AS student_name,
     u.email,
     u.phone,
@@ -17,9 +17,9 @@ class User_model extends CI_Model
     MAX(CASE WHEN s.name = 'SCIENCE' THEN m.marks END) AS science_marks,
     MAX(CASE WHEN s.name = 'ENGLISH' THEN m.marks END) AS english_marks
 FROM marks m
-JOIN students st ON m.student_id 
-JOIN users u ON st.user_id 
-JOIN subjects s ON m.subject_id 
+JOIN students st ON m.student_id
+JOIN users u ON st.user_id
+JOIN subjects s ON m.subject_id
 GROUP BY st.id, u.name, u.email, u.phone, u.address,u.gender, u.dob, st.section;
     ";
 
@@ -35,6 +35,11 @@ GROUP BY st.id, u.name, u.email, u.phone, u.address,u.gender, u.dob, st.section;
 	public function get_user($id)
 	{
 		return $this->db->get_where("users", ["id" => $id])->row_array();
+	}
+
+	public function get_user_by_email($email)
+	{
+		return $this->db->get_where("users", ["email" => $email])->row();
 	}
 
 	public function update_user($id, $data)

@@ -1,15 +1,19 @@
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
 <style>
     * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
     }
-    body { 
+    body {
         font-family: 'Segoe UI', Arial, sans-serif;
         background: #f1f3f6;
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
         height: 100vh;
     }
     section {
@@ -18,11 +22,11 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        max-width: 440px;
+        max-width: 340px;
         height: 100vh;
     }
-    h2 { 
-        margin-bottom: 20px; 
+    h2 {
+        margin-bottom: 20px;
         color: #22223b;
         text-align: center;
         letter-spacing: 1px;
@@ -36,7 +40,6 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-        min-height: 480px;
         justify-content: flex-start;
     }
     label {
@@ -62,9 +65,9 @@
         box-shadow: 0 0 0 2px #e3f0ff;
         background: #fff;
     }
-    textarea { 
-        resize: vertical; 
-        min-height: 79px;
+    textarea {
+        resize: vertical;
+        min-height: 48px;
         max-height: 120px;
     }
     input[type="submit"] {
@@ -90,45 +93,43 @@
         font-size: 12px;
         margin-bottom: 8px;
         margin-top: -10px;
+        background: #ffeaea;
+        padding: 6px 8px;
+        border-radius: 4px;
+        border-left: 3px solid #e63946;
+        font-weight: 500;
     }
     select {
         appearance: none;
         background: #f8f8fa url('data:image/svg+xml;utf8,<svg fill="gray" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 9px center/16px 16px;
     }
+    .error-input {
+        border-color: #e63946 !important;
+        background: #ffeaea !important;
+        box-shadow: 0 0 0 2px #ffeaea !important;
+    }
 </style>
 <section>
-    <h2>Sign up</h2>
-    <form action="<?= site_url('user/store') ?>" method="post">
-    <label>Name:</label>
-    <input type="text" name="name" value="<?= set_value('name') ?>">
-    <?php echo form_error('name'); ?>
+    <h2>Login</h2>
+    <form action="<?= site_url("auth") ?>" method="post">
     <label>Email:</label>
-    <input type="email" name="email" value="<?= set_value('email') ?>">
-    <?php echo form_error('email'); ?>
-    <label>Password:</label> 
-    <input type="password" name="password" value="<?= set_value('password') ?>">
-    <?php echo form_error('password'); ?>
-    <label>Phone:</label>
-    <input type="text" name="phone" value="<?= set_value('phone') ?>">
-    <?php echo form_error('phone'); ?>
-    <label>Address:</label>
-    <textarea name="address"><?= set_value('address') ?></textarea>
-    <?php echo form_error('address'); ?>
-    <label>Gender:</label>
-    <select name="gender">
-        <option value="1" <?= set_value('gender') == 1 ? 'selected' : '' ?>>Male</option>
-        <option value="2" <?= set_value('gender') == 2 ? 'selected' : '' ?>>Female</option>
-    </select>
-    <?php echo form_error('gender'); ?>
-    <label>Role:</label>
-    <select name="role">
-        <option value="1" <?= set_value('role') == 1 ? 'selected' : '' ?>>Student</option>
-        <option value="2" <?= set_value('role') == 2 ? 'selected' : '' ?>>Teacher</option>
-    </select>
-    <?php echo form_error('role'); ?>
-    <label>DOB:</label>
-    <input type="date" name="dob" value="<?= set_value('dob') ?>">
-    <?php echo form_error('dob'); ?>
-    <input type="submit" value="Save">
+    <input type="email" name="email" value="<?= isset($email)
+    	? $email
+    	: "" ?>" class="<?= isset($validation_errors["email"])
+	? "error-input"
+	: "" ?>">
+    <?php if (isset($validation_errors["email"])): ?>
+        <p><?= $validation_errors["email"] ?></p>
+    <?php endif; ?>
+    <label>Password:</label>
+    <input type="password" name="password" value="" class="<?= isset(
+    	$validation_errors["password"]
+    )
+    	? "error-input"
+    	: "" ?>">
+    <?php if (isset($validation_errors["password"])): ?>
+        <p><?= $validation_errors["password"] ?></p>
+    <?php endif; ?>
+    <input type="submit" value="Login">
 </form>
 </section>
