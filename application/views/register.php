@@ -179,11 +179,11 @@
     	? "error-input"
     	: "" ?>">
         <option value="">Select Role</option>
-        <option value="1" <?= isset($form_data["role"]) &&
+        <option value="student" <?= isset($form_data["role"]) &&
         $form_data["role"] == 1
         	? "selected"
         	: "" ?>>Student</option>
-        <option value="2" <?= isset($form_data["role"]) &&
+        <option value="teacher" <?= isset($form_data["role"]) &&
         $form_data["role"] == 2
         	? "selected"
         	: "" ?>>Teacher</option>

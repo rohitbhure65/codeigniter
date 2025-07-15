@@ -79,85 +79,85 @@
 	<?php if (!empty($this->session->userdata("username"))): ?>
         <div class="flex item-center justify-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
             <h2 style="margin: 0; font-size: 1.5rem; font-weight: 600;">
-                Welcome back, <?= htmlspecialchars(
-                	$this->session->userdata("username")
-                ) ?>!
-                <span style="font-size: 1rem; font-weight: 400; opacity: 0.9;">(<?= htmlspecialchars(
+                Welcome,
+                	<?= $this->session->userdata("username")
+                 ?>
+                <span style="font-size: 1rem; font-weight: 400; opacity: 0.9;">(<?= 
                 	$this->session->userdata("role")
-                ) ?>)</span>
+                 ?>)</span>
             </h2>
         </div>
     <?php endif; ?>
 
 	<div class="butt" style="justify-content: center; align-items: center; flex-wrap: wrap;">
 
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Roll No</th>
-                <th>Section</th>
-                <th>Class</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Gender</th>
-                <th>DOB</th>
-                <th>Marks</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
+    <table class="p-10 m-20">
+            <thead>
                 <tr>
-                    <td><?= $user["student_name"] ?></td>
-                    <td><?= $user["roll_no"] ?></td>
-                    <td><?= $user["section"] ?></td>
-                    <td><?= $user["class"] ?></td>
-                    <td><?= $user["email"] ?></td>
-                    <td><?= $user["phone"] ?></td>
-                    <td><?= $user["address"] ?></td>
-                    <td><?= $user["gender"] ?></td>
-                    <td><?= $user["dob"] ?></td>
-                    <td>
-                        <?php
-                        $has_marks = false;
-                        $subjects = [
-                        	"science_marks",
-                        	"english_marks",
-                        	"math_marks",
-                        ];
-                        foreach ($subjects as $subject) {
-                        	if (!empty($user[$subject])) {
-                        		$has_marks = true;
-                        		break;
-                        	}
-                        }
-                        ?>
-
-                        <?php if ($has_marks): ?>
-                            <ul>
-                                <?php if (!empty($user["science_marks"])): ?>
-                                    <li>Science - <?= $user[
-                                    	"science_marks"
-                                    ] ?></li>
-                                <?php endif; ?>
-                                <?php if (!empty($user["english_marks"])): ?>
-                                    <li>English - <?= $user[
-                                    	"english_marks"
-                                    ] ?></li>
-                                <?php endif; ?>
-                                <?php if (!empty($user["math_marks"])): ?>
-                                    <li>Mathematics - <?= $user[
-                                    	"math_marks"
-                                    ] ?></li>
-                                <?php endif; ?>
-                            </ul>
-                        <?php else: ?>
-                            <span style="color: #888;">No subjects/marks assigned</span>
-                        <?php endif; ?>
-                    </td>
+                    <th>Name</th>
+                    <th>Roll No</th>
+                    <th>Section</th>
+                    <th>Class</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Gender</th>
+                    <th>DOB</th>
+                    <th>Marks</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td><?= $user["student_name"] ?></td>
+                        <td><?= $user["roll_no"] ?></td>
+                        <td><?= $user["section"] ?></td>
+                        <td><?= $user["class"] ?></td>
+                        <td><?= $user["email"] ?></td>
+                        <td><?= $user["phone"] ?></td>
+                        <td><?= $user["address"] ?></td>
+                        <td><?= $user["gender"] ?></td>
+                        <td><?= $user["dob"] ?></td>
+                        <td>
+                            <?php
+                            $has_marks = false;
+                            $subjects = [
+                                "science_marks",
+                                "english_marks",
+                                "math_marks",
+                            ];
+                            foreach ($subjects as $subject) {
+                                if (!empty($user[$subject])) {
+                                    $has_marks = true;
+                                    break;
+                                }
+                            }
+                            ?>
+
+                            <?php if ($has_marks): ?>
+                                <ul>
+                                    <?php if (!empty($user["science_marks"])): ?>
+                                        <li>Science - <?= $user[
+                                            "science_marks"
+                                        ] ?></li>
+                                    <?php endif; ?>
+                                    <?php if (!empty($user["english_marks"])): ?>
+                                        <li>English - <?= $user[
+                                            "english_marks"
+                                        ] ?></li>
+                                    <?php endif; ?>
+                                    <?php if (!empty($user["math_marks"])): ?>
+                                        <li>Mathematics - <?= $user[
+                                            "math_marks"
+                                        ] ?></li>
+                                    <?php endif; ?>
+                                </ul>
+                            <?php else: ?>
+                                <span style="color: #888;">No subjects/marks assigned</span>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
 </div>
