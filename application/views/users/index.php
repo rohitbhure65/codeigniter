@@ -66,11 +66,23 @@
 </style>
 
 <div class="homepageh1">
+    <!-- <pre style="color:black;padding: 10px;margin: 10px; width:600px; border: 1px solid black"><?php print_r($this->session->all_userdata()); ?></pre> -->
+
 	<h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 15px; color: #333; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">Student List</h1>
 	<div class="butt" style="justify-content: center; align-items: center; flex-wrap: wrap;">
-		<a href="user/register" style="text-decoration: none;"><button class="signup-btn" style="text-transform: uppercase; min-width: 120px;">signup</button></a>
-		<a href="user/login" style="text-decoration: none;"><button class="signup-btn" style="text-transform: uppercase; min-width: 120px;">Login</button></a>
-	</div>
+        <?php
+        if(empty($this->session->userdata('username'))){
+            ?>
+            <a href="register" style="text-decoration: none;"><button class="signup-btn" style="text-transform: uppercase; min-width: 120px;">signup</button></a>
+            <a href="login" style="text-decoration: none;"><button class="signup-btn" style="text-transform: uppercase; min-width: 120px;">Login</button></a>
+            <?php
+        } else {
+            ?>
+            <a href="user/logout" style="text-decoration: none;"><button class="signup-btn" style="text-transform: uppercase; min-width: 120px;">Logout</button></a>
+            <?php
+        }
+        ?>
+            </div>
     <table>
         <thead>
             <tr>

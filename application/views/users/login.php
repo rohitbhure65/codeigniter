@@ -18,7 +18,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        max-width: 440px;
+        max-width: 340px;
         height: 100vh;
     }
     h2 { 
@@ -36,7 +36,7 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-        min-height: 480px;
+      
         justify-content: flex-start;
     }
     label {
@@ -64,7 +64,7 @@
     }
     textarea { 
         resize: vertical; 
-        min-height: 79px;
+        min-height: 48px;
         max-height: 120px;
     }
     input[type="submit"] {
@@ -97,10 +97,8 @@
     }
 </style>
 <section>
-    <h2>Sign up</h2>
+    <h2>Login</h2>
     <form action="<?= site_url('user/store') ?>" method="post">
-    <label>Name:</label>
-    <input type="text" name="name" value="<?= set_value('name') ?>">
     <?php echo form_error('name'); ?>
     <label>Email:</label>
     <input type="email" name="email" value="<?= set_value('email') ?>">
@@ -108,27 +106,6 @@
     <label>Password:</label> 
     <input type="password" name="password" value="<?= set_value('password') ?>">
     <?php echo form_error('password'); ?>
-    <label>Phone:</label>
-    <input type="text" name="phone" value="<?= set_value('phone') ?>">
-    <?php echo form_error('phone'); ?>
-    <label>Address:</label>
-    <textarea name="address"><?= set_value('address') ?></textarea>
-    <?php echo form_error('address'); ?>
-    <label>Gender:</label>
-    <select name="gender">
-        <option value="1" <?= set_value('gender') == 1 ? 'selected' : '' ?>>Male</option>
-        <option value="2" <?= set_value('gender') == 2 ? 'selected' : '' ?>>Female</option>
-    </select>
-    <?php echo form_error('gender'); ?>
-    <label>Role:</label>
-    <select name="role">
-        <option value="1" <?= set_value('role') == 1 ? 'selected' : '' ?>>Student</option>
-        <option value="2" <?= set_value('role') == 2 ? 'selected' : '' ?>>Teacher</option>
-    </select>
-    <?php echo form_error('role'); ?>
-    <label>DOB:</label>
-    <input type="date" name="dob" value="<?= set_value('dob') ?>">
-    <?php echo form_error('dob'); ?>
     <input type="submit" value="Save">
 </form>
 </section>
