@@ -73,8 +73,8 @@
         <?php
         if(empty($this->session->userdata('username'))){
             ?>
-            <a href="register" style="text-decoration: none;"><button class="signup-btn" style="text-transform: uppercase; min-width: 120px;">signup</button></a>
-            <a href="login" style="text-decoration: none;"><button class="signup-btn" style="text-transform: uppercase; min-width: 120px;">Login</button></a>
+            <a href="user/register" style="text-decoration: none;"><button class="signup-btn" style="text-transform: uppercase; min-width: 120px;">signup</button></a>
+            <a href="user/login" style="text-decoration: none;"><button class="signup-btn" style="text-transform: uppercase; min-width: 120px;">Login</button></a>
             <?php
         } else {
             ?>

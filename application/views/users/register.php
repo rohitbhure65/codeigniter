@@ -4,12 +4,12 @@
         margin: 0;
         padding: 0;
     }
-    body { 
+    body {
         font-family: 'Segoe UI', Arial, sans-serif;
         background: #f1f3f6;
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: 100vh;
     }
     section {
@@ -21,8 +21,8 @@
         max-width: 440px;
         height: 100vh;
     }
-    h2 { 
-        margin-bottom: 20px; 
+    h2 {
+        margin-bottom: 20px;
         color: #22223b;
         text-align: center;
         letter-spacing: 1px;
@@ -62,8 +62,8 @@
         box-shadow: 0 0 0 2px #e3f0ff;
         background: #fff;
     }
-    textarea { 
-        resize: vertical; 
+    textarea {
+        resize: vertical;
         min-height: 79px;
         max-height: 120px;
     }
@@ -98,37 +98,77 @@
 </style>
 <section>
     <h2>Sign up</h2>
-    <form action="<?= site_url('user/store') ?>" method="post">
+    <form action="<?= site_url("user/store") ?>" method="post">
     <label>Name:</label>
-    <input type="text" name="name" value="<?= set_value('name') ?>">
-    <?php echo form_error('name'); ?>
+    <input type="text" name="name" value="<?= isset($form_data["name"])
+    	? $form_data["name"]
+    	: "" ?>">
+    <?php if (isset($validation_errors["name"])): ?>
+        <p><?= $validation_errors["name"] ?></p>
+    <?php endif; ?>
     <label>Email:</label>
-    <input type="email" name="email" value="<?= set_value('email') ?>">
-    <?php echo form_error('email'); ?>
-    <label>Password:</label> 
-    <input type="password" name="password" value="<?= set_value('password') ?>">
-    <?php echo form_error('password'); ?>
+    <input type="email" name="email" value="<?= isset($form_data["email"])
+    	? $form_data["email"]
+    	: "" ?>">
+    <?php if (isset($validation_errors["email"])): ?>
+        <p><?= $validation_errors["email"] ?></p>
+    <?php endif; ?>
+    <label>Password:</label>
+    <input type="password" name="password" value="">
+    <?php if (isset($validation_errors["password"])): ?>
+        <p><?= $validation_errors["password"] ?></p>
+    <?php endif; ?>
     <label>Phone:</label>
-    <input type="text" name="phone" value="<?= set_value('phone') ?>">
-    <?php echo form_error('phone'); ?>
+    <input type="text" name="phone" value="<?= isset($form_data["phone"])
+    	? $form_data["phone"]
+    	: "" ?>">
+    <?php if (isset($validation_errors["phone"])): ?>
+        <p><?= $validation_errors["phone"] ?></p>
+    <?php endif; ?>
     <label>Address:</label>
-    <textarea name="address"><?= set_value('address') ?></textarea>
-    <?php echo form_error('address'); ?>
+    <textarea name="address"><?= isset($form_data["address"])
+    	? $form_data["address"]
+    	: "" ?></textarea>
+    <?php if (isset($validation_errors["address"])): ?>
+        <p><?= $validation_errors["address"] ?></p>
+    <?php endif; ?>
     <label>Gender:</label>
     <select name="gender">
-        <option value="1" <?= set_value('gender') == 1 ? 'selected' : '' ?>>Male</option>
-        <option value="2" <?= set_value('gender') == 2 ? 'selected' : '' ?>>Female</option>
+        <option value="">Select Gender</option>
+        <option value="1" <?= isset($form_data["gender"]) &&
+        $form_data["gender"] == 1
+        	? "selected"
+        	: "" ?>>Male</option>
+        <option value="2" <?= isset($form_data["gender"]) &&
+        $form_data["gender"] == 2
+        	? "selected"
+        	: "" ?>>Female</option>
     </select>
-    <?php echo form_error('gender'); ?>
+    <?php if (isset($validation_errors["gender"])): ?>
+        <p><?= $validation_errors["gender"] ?></p>
+    <?php endif; ?>
     <label>Role:</label>
     <select name="role">
-        <option value="1" <?= set_value('role') == 1 ? 'selected' : '' ?>>Student</option>
-        <option value="2" <?= set_value('role') == 2 ? 'selected' : '' ?>>Teacher</option>
+        <option value="">Select Role</option>
+        <option value="1" <?= isset($form_data["role"]) &&
+        $form_data["role"] == 1
+        	? "selected"
+        	: "" ?>>Student</option>
+        <option value="2" <?= isset($form_data["role"]) &&
+        $form_data["role"] == 2
+        	? "selected"
+        	: "" ?>>Teacher</option>
     </select>
-    <?php echo form_error('role'); ?>
+    <?php if (isset($validation_errors["role"])): ?>
+        <p><?= $validation_errors["role"] ?></p>
+    <?php endif; ?>
     <label>DOB:</label>
-    <input type="date" name="dob" value="<?= set_value('dob') ?>">
-    <?php echo form_error('dob'); ?>
-    <input type="submit" value="Save">
+    <input type="date" name="dob" value="<?= isset($form_data["dob"])
+    	? $form_data["dob"]
+    	: "" ?>">
+    <?php if (isset($validation_errors["dob"])): ?>
+        <p><?= $validation_errors["dob"] ?></p>
+    <?php endif; ?>
+    <input type="submit" value="Register">
 </form>
 </section>

@@ -4,12 +4,12 @@
         margin: 0;
         padding: 0;
     }
-    body { 
+    body {
         font-family: 'Segoe UI', Arial, sans-serif;
         background: #f1f3f6;
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: 100vh;
     }
     section {
@@ -21,8 +21,8 @@
         max-width: 340px;
         height: 100vh;
     }
-    h2 { 
-        margin-bottom: 20px; 
+    h2 {
+        margin-bottom: 20px;
         color: #22223b;
         text-align: center;
         letter-spacing: 1px;
@@ -36,7 +36,7 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-      
+
         justify-content: flex-start;
     }
     label {
@@ -62,8 +62,8 @@
         box-shadow: 0 0 0 2px #e3f0ff;
         background: #fff;
     }
-    textarea { 
-        resize: vertical; 
+    textarea {
+        resize: vertical;
         min-height: 48px;
         max-height: 120px;
     }
@@ -90,22 +90,43 @@
         font-size: 12px;
         margin-bottom: 8px;
         margin-top: -10px;
+        background: #ffeaea;
+        padding: 6px 8px;
+        border-radius: 4px;
+        border-left: 3px solid #e63946;
+        font-weight: 500;
     }
     select {
         appearance: none;
         background: #f8f8fa url('data:image/svg+xml;utf8,<svg fill="gray" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 9px center/16px 16px;
     }
+    .error-input {
+        border-color: #e63946 !important;
+        background: #ffeaea !important;
+        box-shadow: 0 0 0 2px #ffeaea !important;
+    }
 </style>
 <section>
     <h2>Login</h2>
-    <form action="<?= site_url('user/store') ?>" method="post">
-    <?php echo form_error('name'); ?>
+    <form action="<?= site_url("user/auth") ?>" method="post">
     <label>Email:</label>
-    <input type="email" name="email" value="<?= set_value('email') ?>">
-    <?php echo form_error('email'); ?>
-    <label>Password:</label> 
-    <input type="password" name="password" value="<?= set_value('password') ?>">
-    <?php echo form_error('password'); ?>
-    <input type="submit" value="Save">
+    <input type="email" name="email" value="<?= isset($email)
+    	? $email
+    	: "" ?>" class="<?= isset($validation_errors["email"])
+	? "error-input"
+	: "" ?>">
+    <?php if (isset($validation_errors["email"])): ?>
+        <p><?= $validation_errors["email"] ?></p>
+    <?php endif; ?>
+    <label>Password:</label>
+    <input type="password" name="password" value="" class="<?= isset(
+    	$validation_errors["password"]
+    )
+    	? "error-input"
+    	: "" ?>">
+    <?php if (isset($validation_errors["password"])): ?>
+        <p><?= $validation_errors["password"] ?></p>
+    <?php endif; ?>
+    <input type="submit" value="Login">
 </form>
 </section>
