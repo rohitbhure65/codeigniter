@@ -81,16 +81,16 @@ class User extends CI_Controller
 			$data["email"] = $email;
 			$this->load->view("login", $data);
 			return;
+		}else{
+			// Login successful
+			$newdata = [
+				"username" => $user->name,
+				"email" => $user->email,
+				"role" => $user->role,
+			];
+			$this->session->set_userdata($newdata);
+			redirect("index");
 		}
-
-		// Login successful
-		$newdata = [
-			"username" => $user->name,
-			"email" => $user->email,
-			"role" => $user->role,
-		];
-		$this->session->set_userdata($newdata);
-		redirect("index");
 	}
 
 	// Shows the form to edit an existing user
