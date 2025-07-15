@@ -101,9 +101,6 @@
     <label>Email:</label>
     <input type="email" name="email" value="<?= set_value('email') ?>">
     <?php echo form_error('email'); ?>
-    <label>Username:</label>
-    <input type="text" name="uname" value="<?= set_value('uname') ?>">
-    <?php echo form_error('uname'); ?>
     <label>Password:</label> 
     <input type="password" name="password" value="<?= set_value('password') ?>">
     <?php echo form_error('password'); ?>

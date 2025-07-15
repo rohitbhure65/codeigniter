@@ -13,10 +13,10 @@ class User extends CI_Controller
 	}
 
 	// Shows the form to create a new user
-	public function create()
+	public function register()
 	{
 		$this->load->helper("form");
-		$this->load->view("users/create");
+		$this->load->view("users/register");
 	}
 
 	// Handles form submission for creating a new user
@@ -28,11 +28,6 @@ class User extends CI_Controller
 			"name",
 			"Name",
 			"required|min_length[3]"
-		);
-		$this->form_validation->set_rules(
-			"uname",
-			"Uname",
-			"required|min_length[5]|max_length[12]|is_unique[users.uname"
 		);
 		$this->form_validation->set_rules(
 			"password",
@@ -54,12 +49,13 @@ class User extends CI_Controller
 		$this->form_validation->set_rules("dob", "DOB", "required");
 
 		if ($this->form_validation->run() == false) {
-			$this->load->view("users/create");
+			$this->load->view("users/register");
 		} else {
 			// $data = $this->input->post(); // insted of this we can also create using associative array
 			$data = [
 				"name" => $this->input->post("name"),
 				"email" => $this->input->post("email"),
+				"password" => password_hash($this->input->post("password"), PASSWORD_BCRYPT),
 				"phone" => $this->input->post("phone"),
 				"address" => $this->input->post("address"),
 				"gender" => $this->input->post("gender"),
