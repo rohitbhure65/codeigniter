@@ -53,7 +53,7 @@
 </style>
 <section>
     <h2>Edit User</h2>
-    <form action="<?= site_url('user/update/'.$user['id']) ?>" method="post">
+    <form action="<?= site_url('update/'.$user['id']) ?>" method="post">
     <label>Name:</label>
     <input type="text" name="name" value="<?= set_value('name', $user['name']) ?>">
     <?php echo form_error('name'); ?>

@@ -18,7 +18,7 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        max-width: 340px;
+        max-width: 440px;
         height: 100vh;
     }
     h2 {
@@ -36,7 +36,7 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-
+        min-height: 480px;
         justify-content: flex-start;
     }
     label {
@@ -64,7 +64,7 @@
     }
     textarea {
         resize: vertical;
-        min-height: 48px;
+        min-height: 79px;
         max-height: 120px;
     }
     input[type="submit"] {
@@ -107,11 +107,20 @@
     }
 </style>
 <section>
-    <h2>Login</h2>
-    <form action="<?= site_url("user/auth") ?>" method="post">
+    <h2>Sign up</h2>
+    <form action="<?= site_url("store") ?>" method="post">
+    <label>Name:</label>
+    <input type="text" name="name" value="<?= isset($form_data["name"])
+    	? $form_data["name"]
+    	: "" ?>" class="<?= isset($validation_errors["name"])
+	? "error-input"
+	: "" ?>">
+    <?php if (isset($validation_errors["name"])): ?>
+        <p><?= $validation_errors["name"] ?></p>
+    <?php endif; ?>
     <label>Email:</label>
-    <input type="email" name="email" value="<?= isset($email)
-    	? $email
+    <input type="email" name="email" value="<?= isset($form_data["email"])
+    	? $form_data["email"]
     	: "" ?>" class="<?= isset($validation_errors["email"])
 	? "error-input"
 	: "" ?>">
@@ -127,6 +136,67 @@
     <?php if (isset($validation_errors["password"])): ?>
         <p><?= $validation_errors["password"] ?></p>
     <?php endif; ?>
-    <input type="submit" value="Login">
+    <label>Phone:</label>
+    <input type="text" name="phone" value="<?= isset($form_data["phone"])
+    	? $form_data["phone"]
+    	: "" ?>" class="<?= isset($validation_errors["phone"])
+	? "error-input"
+	: "" ?>">
+    <?php if (isset($validation_errors["phone"])): ?>
+        <p><?= $validation_errors["phone"] ?></p>
+    <?php endif; ?>
+    <label>Address:</label>
+    <textarea name="address" class="<?= isset($validation_errors["address"])
+    	? "error-input"
+    	: "" ?>"><?= isset($form_data["address"])
+	? $form_data["address"]
+	: "" ?></textarea>
+    <?php if (isset($validation_errors["address"])): ?>
+        <p><?= $validation_errors["address"] ?></p>
+    <?php endif; ?>
+    <label>Gender:</label>
+    <select name="gender" class="<?= isset($validation_errors["gender"])
+    	? "error-input"
+    	: "" ?>">
+        <option value="">Select Gender</option>
+        <option value="1" <?= isset($form_data["gender"]) &&
+        $form_data["gender"] == 1
+        	? "selected"
+        	: "" ?>>Male</option>
+        <option value="2" <?= isset($form_data["gender"]) &&
+        $form_data["gender"] == 2
+        	? "selected"
+        	: "" ?>>Female</option>
+    </select>
+    <?php if (isset($validation_errors["gender"])): ?>
+        <p><?= $validation_errors["gender"] ?></p>
+    <?php endif; ?>
+    <label>Role:</label>
+    <select name="role" class="<?= isset($validation_errors["role"])
+    	? "error-input"
+    	: "" ?>">
+        <option value="">Select Role</option>
+        <option value="1" <?= isset($form_data["role"]) &&
+        $form_data["role"] == 1
+        	? "selected"
+        	: "" ?>>Student</option>
+        <option value="2" <?= isset($form_data["role"]) &&
+        $form_data["role"] == 2
+        	? "selected"
+        	: "" ?>>Teacher</option>
+    </select>
+    <?php if (isset($validation_errors["role"])): ?>
+        <p><?= $validation_errors["role"] ?></p>
+    <?php endif; ?>
+    <label>DOB:</label>
+    <input type="date" name="dob" value="<?= isset($form_data["dob"])
+    	? $form_data["dob"]
+    	: "" ?>" class="<?= isset($validation_errors["dob"])
+	? "error-input"
+	: "" ?>">
+    <?php if (isset($validation_errors["dob"])): ?>
+        <p><?= $validation_errors["dob"] ?></p>
+    <?php endif; ?>
+    <input type="submit" value="Register">
 </form>
 </section>

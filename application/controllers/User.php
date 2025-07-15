@@ -4,20 +4,20 @@ defined("BASEPATH") or exit("No direct script access allowed");
 
 // Defines the User controller, extending CodeIgniter's base controller
 class User extends CI_Controller
-{
+{	
 	// Displays the list of users
 	public function index()
 	{
 		$data = [];
 		$data["users"] = $this->User_model->get_all_users();
-		$this->load->view("users/index", $data);
+		$this->load->view("index", $data);
 	}
 
 	// Shows the form to create a new user
 	public function register()
 	{
 		$this->load->helper("form");
-		$this->load->view("users/register");
+		$this->load->view("register");
 	}
 
 	// Handles form submission for creating a new user
@@ -34,95 +34,6 @@ class User extends CI_Controller
 		$role = $this->input->post("role");
 		$gender = $this->input->post("gender");
 		$dob = $this->input->post("dob");
-
-		// Custom validation
-		$validation_errors = [];
-
-		// Name validation
-		if (empty($name)) {
-			$validation_errors["name"] = "Name is required";
-		} elseif (strlen($name) < 3) {
-			$validation_errors["name"] =
-				"Name must be at least 3 characters long";
-		}
-
-		// Email validation
-		if (empty($email)) {
-			$validation_errors["email"] = "Email is required";
-		} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			$validation_errors["email"] = "Please enter a valid email address";
-		} else {
-			// Check if email already exists
-			$existing_user = $this->User_model->get_user_by_email($email);
-			if ($existing_user) {
-				$validation_errors["email"] =
-					"This email is already registered";
-			}
-		}
-
-		// Password validation
-		if (empty($password)) {
-			$validation_errors["password"] = "Password is required";
-		} elseif (strlen($password) < 8) {
-			$validation_errors["password"] =
-				"Password must be at least 8 characters long";
-		} elseif (!preg_match("/[A-Z]/", $password)) {
-			$validation_errors["password"] =
-				"Password must contain at least one uppercase letter";
-		} elseif (!preg_match("/[a-z]/", $password)) {
-			$validation_errors["password"] =
-				"Password must contain at least one lowercase letter";
-		} elseif (!preg_match("/[0-9]/", $password)) {
-			$validation_errors["password"] =
-				"Password must contain at least one number";
-		}
-
-		// Phone validation
-		if (empty($phone)) {
-			$validation_errors["phone"] = "Phone is required";
-		} elseif (!is_numeric($phone)) {
-			$validation_errors["phone"] = "Phone must contain only numbers";
-		} elseif (strlen($phone) != 10) {
-			$validation_errors["phone"] = "Phone must be exactly 10 digits";
-		}
-
-		// Address validation
-		if (empty($address)) {
-			$validation_errors["address"] = "Address is required";
-		}
-
-		// Role validation
-		if (empty($role)) {
-			$validation_errors["role"] = "Role is required";
-		}
-
-		// Gender validation
-		if (empty($gender)) {
-			$validation_errors["gender"] = "Gender is required";
-		}
-
-		// DOB validation
-		if (empty($dob)) {
-			$validation_errors["dob"] = "Date of birth is required";
-		}
-
-		// If validation errors exist, show them
-		if (!empty($validation_errors)) {
-			$data = [
-				"validation_errors" => $validation_errors,
-				"form_data" => [
-					"name" => $name,
-					"email" => $email,
-					"phone" => $phone,
-					"address" => $address,
-					"role" => $role,
-					"gender" => $gender,
-					"dob" => $dob,
-				],
-			];
-			$this->load->view("users/register", $data);
-			return;
-		}
 
 		// Save user data
 		$data = [
@@ -150,7 +61,7 @@ class User extends CI_Controller
 	public function login()
 	{
 		$this->load->helper("form");
-		$this->load->view("users/login");
+		$this->load->view("login");
 	}
 
 	public function auth()
@@ -161,49 +72,14 @@ class User extends CI_Controller
 		$email = $this->input->post("email");
 		$password = $this->input->post("password");
 
-		// Custom validation for email and password
-		$validation_errors = [];
-
-		// Email validation
-		if (empty($email)) {
-			$validation_errors["email"] = "Email is required";
-		} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			$validation_errors["email"] = "Please enter a valid email address";
-		}
-
-		// Password validation
-		if (empty($password)) {
-			$validation_errors["password"] = "Password is required";
-		} elseif (strlen($password) < 8) {
-			$validation_errors["password"] =
-				"Password must be at least 8 characters long";
-		}
-
-		// If validation errors exist, show them
-		if (!empty($validation_errors)) {
-			$data["validation_errors"] = $validation_errors;
-			$data["email"] = $email;
-			$this->load->view("users/login", $data);
-			return;
-		}
-
 		// Check if user exists with this email
 		$user = $this->User_model->get_user_by_email($email);
-
-		if (!$user) {
-			$data["validation_errors"] = [
-				"email" => "No account found with this email address",
-			];
-			$data["email"] = $email;
-			$this->load->view("users/login", $data);
-			return;
-		}
 
 		// Verify password
 		if (!password_verify($password, $user->password)) {
 			$data["validation_errors"] = ["password" => "Incorrect password"];
 			$data["email"] = $email;
-			$this->load->view("users/login", $data);
+			$this->load->view("login", $data);
 			return;
 		}
 
@@ -214,7 +90,7 @@ class User extends CI_Controller
 			"role" => $user->role,
 		];
 		$this->session->set_userdata($newdata);
-		redirect("user");
+		redirect("index");
 	}
 
 	// Shows the form to edit an existing user
@@ -223,7 +99,7 @@ class User extends CI_Controller
 		$this->load->helper("form");
 		$data = [];
 		$data["user"] = $this->User_model->get_user($id);
-		$this->load->view("users/edit", $data);
+		$this->load->view("edit", $data);
 	}
 
 	// Handles form submission for updating a user
@@ -253,7 +129,7 @@ class User extends CI_Controller
 		if ($this->form_validation->run() == false) {
 			$data = [];
 			$data["user"] = $this->User_model->get_user($id);
-			$this->load->view("users/edit", $data);
+			$this->load->view("edit", $data);
 		} else {
 			$data = $this->input->post();
 			$this->User_model->update_user($id, $data);
@@ -271,6 +147,6 @@ class User extends CI_Controller
 	public function logout()
 	{
 		$this->session->sess_destroy();
-		redirect("user/index");
+		redirect("index");
 	}
 }
