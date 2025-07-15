@@ -65,4 +65,4 @@ $route["auth"] = "user/auth";
 $route["store"] = "user/store";
 $route["edit/(:num)"] = 'user/edit/$1';
 $route["update/(:num)"] = 'user/update/$1';
-$route["delete/(:num)"] = 'user/delete/$1';
+$route["delete/(:num)"] = 'user/delete/$1';     

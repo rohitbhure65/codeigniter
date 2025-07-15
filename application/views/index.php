@@ -1,3 +1,7 @@
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+
 <style>
     body { font-family: Arial, sans-serif; }
     h2 { margin-bottom: 20px; }
@@ -65,15 +69,15 @@
     }
 </style>
 
-<div class="homepageh1">
+<div class="">
     <!-- <pre style="color:black;padding: 10px;margin: 10px; width:600px; border: 1px solid black"><?php print_r(
     	$this->session->all_userdata()
-    ); ?></pre> -->
+    ); ?></pre> --> 
 
-	<h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 15px; color: #333; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">Student List</h1>
+   <?php $this->load->view("includes/header.php"); ?>
 
 	<?php if (!empty($this->session->userdata("username"))): ?>
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+        <div class="flex item-center justify-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
             <h2 style="margin: 0; font-size: 1.5rem; font-weight: 600;">
                 Welcome back, <?= htmlspecialchars(
                 	$this->session->userdata("username")
@@ -86,13 +90,7 @@
     <?php endif; ?>
 
 	<div class="butt" style="justify-content: center; align-items: center; flex-wrap: wrap;">
-        <?php if (empty($this->session->userdata("username"))) { ?>
-            <a href="register" style="text-decoration: none;"><button class="signup-btn" style="text-transform: uppercase; min-width: 120px;">signup</button></a>
-            <a href="login" style="text-decoration: none;"><button class="signup-btn" style="text-transform: uppercase; min-width: 120px;">Login</button></a>
-            <?php } else { ?>
-            <a href="logout" style="text-decoration: none;"><button class="signup-btn" style="text-transform: uppercase; min-width: 120px;">Logout</button></a>
-            <?php } ?>
-            </div>
+
     <table>
         <thead>
             <tr>
