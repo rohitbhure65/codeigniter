@@ -2,6 +2,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
+<style>
+    form p{
+        color:red;
+    }
+</style>
+
 <body class="font-sans bg-gray-100 min-h-screen flex flex-col">
       <?php $this->load->view("includes/header.php"); ?>
     <section class="w-full max-w-sm mx-auto flex-1 flex flex-col justify-center px-4 py-10">
