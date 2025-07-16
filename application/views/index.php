@@ -91,40 +91,44 @@
 
 	<div class="butt" style="justify-content: center; align-items: center; flex-wrap: wrap;">
     <div class="p-2 m-2 text-3xl font-black">STUDENT LIST</div>
-    <table class="p-20 m-20">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Roll No</th>
-                    <th>Section</th>
-                    <th>Class</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Gender</th>
-                    <th>DOB</th>
-                    <th></th>
-                    <th>Science</th>
-                   
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($users as $user): ?>
-                    <tr>
-                        <td><?= $user["student_name"] ?></td>
-                        <td><?= $user["roll_no"] ?></td>
-                        <td><?= $user["section"] ?></td>
-                        <td><?= $user["class"] ?></td>
-                        <td><?= $user["email"] ?></td>
-                        <td><?= $user["phone"] ?></td>
-                        <td><?= $user["address"] ?></td>
-                        <td><?= $user["gender"] ?></td>
-                        <td><?= $user["dob"] ?></td>
-                        <td>-</td>
-                        <td><?= $user["science"] ?></td>
-                      
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+   <table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Section</th>
+            <th>Class</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Gender</th>
+            <th>DOB</th>
+            <th>Science</th>
+            <th>Mathematics</th>
+            <th>Hindi</th>
+            <th>English</th>
+            <th>Social Science</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($users as $user): ?>
+            <tr>
+                <td><?= $user["student_name"] ?></td>
+                <td><?= $user["roll_no"] ?></td>
+                <td><?= $user["section"] ?></td>
+                <td><?= $user["class"] ?></td>
+                <td><?= $user["email"] ?></td>
+                <td><?= $user["phone"] ?></td>
+                <td><?= $user["address"] ?></td>
+                <td><?= $user["gender"] ?></td>
+                <td><?= $user["dob"] ?></td>
+                <td><?= $user["science"] ?></td>
+                <td><?= $user["mathematics"] ?></td>
+                <td><?= $user["hindi"] ?></td>
+                <td><?= $user["english"] ?></td>
+                <td><?= $user["social science"] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
 </div>

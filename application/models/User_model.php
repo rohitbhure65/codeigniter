@@ -17,7 +17,12 @@ SELECT
     st.id AS student_id,
     st.roll_no,
     st.section,
-    st.class
+    st.class,
+    m.science,
+    m.mathematics,
+    m.hindi,
+    m.english,
+    m.`social science`
 FROM
     users u
 JOIN students st ON
@@ -26,7 +31,21 @@ LEFT JOIN marks m ON
     st.id = m.student_id
 GROUP BY
     u.id,
-    st.id
+    st.id,
+    u.name,
+    u.email,
+    u.phone,
+    u.address,
+    u.gender,
+    u.dob,
+    st.roll_no,
+    st.section,
+    st.class,
+    m.science,
+    m.mathematics,
+    m.hindi,
+    m.english,
+    m.`social science`
 ORDER BY
     u.id,
     st.id;
