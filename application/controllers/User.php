@@ -135,8 +135,8 @@ class User extends CI_Controller
 		// Check if user exists with this email
 		$user = $this->User_model->get_user_by_email($email);
 
-		// Verify password
-		if (!password_verify($password, $user->password)) {
+		// Check if user exists and verify password
+		if (!$user || !password_verify($password, $user->password)) {
 			$data["validation_errors"] = ["password" => "Invalid Credentials"];
 			$data["email"] = $email;
 			$this->load->view("login", $data);
