@@ -55,6 +55,7 @@
     }
 </style>
 <section>
+        <?php $this->load->view("includes/header.php"); ?>
     <h2>Edit User</h2>
     <form action="<?= site_url('update/'.$user['id']) ?>" method="post">
     <label>Name:</label>

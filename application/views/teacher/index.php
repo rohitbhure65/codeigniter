@@ -20,7 +20,10 @@
     <?php endif; ?>
 
     <div class="flex flex-col items-center px-4 md:px-10 py-6">
-        <div class="text-3xl font-black mb-4 text-center">STUDENT LIST</div>
+       <div class="text-4xl font-extrabold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 drop-shadow-lg tracking-wide">
+  ADMIN DASHBOARD
+</div>
+
 
         <div class="w-full overflow-auto">
             <table class="min-w-full bg-white border border-gray-200 shadow-sm text-sm rounded-lg">
@@ -40,6 +43,7 @@
                         <th class="px-4 py-2 border">Hindi</th>
                         <th class="px-4 py-2 border">English</th>
                         <th class="px-4 py-2 border">Social Science</th>
+                        <th class="px-4 py-2 border">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700">
@@ -59,6 +63,14 @@
                             <td class="px-4 py-2 border"><?= $user["hindi"] ?></td>
                             <td class="px-4 py-2 border"><?= $user["english"] ?></td>
                             <td class="px-4 py-2 border"><?= $user["social science"] ?></td>
+                            <td class="px-4 py-2 border">
+                               <a href="<?= base_url('marks/insert/' . $user['user_id']) ?>">
+                                <button class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                                    Edit
+                                </button>
+                                </a>
+
+                    </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
