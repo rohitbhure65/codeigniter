@@ -9,35 +9,7 @@
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
    <!-- navbar  -->
-    <header>
-        <nav class="bg-white border-b border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-            <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                <a href="#" class="flex items-center">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 sm:h-9 mr-2" alt="Logo">
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Student Management System</span>
-                </a>
-
-                <div class="flex items-center lg:order-2">
-                    <?php if (empty($this->session->userdata("username"))) { ?>
-                        <a href="register" class="text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 border rounded-lg text-sm px-4 py-2 mr-2">Register</a>
-                        <a href="login" class="text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 border rounded-lg text-sm px-4 py-2 mr-2">Login</a>
-                    <?php } else { ?>
-                        <a href="logout" class="text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 border rounded-lg text-sm px-4 py-2 mr-2">Logout</a>
-                    <?php } ?>
-                    <button data-collapse-toggle="mobile-menu" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700" aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M3 5h14M3 10h14M3 15h14" clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="hidden w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu">
-                    <!-- Optional additional nav items here -->
-                </div>
-            </div>
-        </nav>
-    </header>
+    <?php $this->load->view("includes/header.php"); ?>
 
     <!-- form -->
     <main class="flex-grow flex items-center justify-center py-10 px-4">
