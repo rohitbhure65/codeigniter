@@ -8,13 +8,14 @@ class User extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model("User_model");
-		$this->load->library("session");
-	}
+			$this->load->model("User_model");
+			$this->load->library("session");
+    }
 
 	// Displays the list of users
 	public function index()
 	{
+		if (!$this->session->userdata('email')) redirect('register');
 		$data = [];
 		$data["users"] = $this->User_model->get_all_users();
 		$this->load->view("index", $data);
@@ -107,7 +108,12 @@ class User extends CI_Controller
 					"role" => $role,
 				];
 				$this->session->set_userdata($newdata);
-				redirect("user");
+			
+				if ($this->session->userdata('role') != 'teacher') {
+					redirect("/");
+				}else{
+					redirect("deshboard");
+        }
 			} else {
 				$this->session->set_flashdata(
 					"error",

@@ -1,134 +1,69 @@
-  <head>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Student List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-<style>
-    body { font-family: Arial, sans-serif; }
-    h2 { margin-bottom: 20px; }
-    .homepageh1 {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        margin: 20px;
-        color: red;
-    }
-    a.button {
-        background: #007bff;
-        color: #fff !important;
-        padding: 6px 14px;
-        border-radius: 4px;
-        text-decoration: none;
-        margin-bottom: 10px;
-        display: inline-block;
-    }
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-top: 10px;
-    }
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px 12px;
-        text-align: left;
-    }
-    th {
-        background: #f2f2f2;
-    }
-    tr:nth-child(even) { background: #fafafa; }
-    tr:hover { background: #f1f7ff; }
-    .actions a {
-        margin-right: 8px;
-        color: #007bff;
-        text-decoration: none;
-    }
-    .actions a:last-child { margin-right: 0; }
-    .signup-btn {
-        background: linear-gradient(90deg, #4f8cff 0%, #007bff 100%);
-        color: #fff;
-        border: none;
-        padding: 8px 22px;
-        border-radius: 5px;
-        font-size: 15px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        margin-bottom: 18px;
-        margin-top: 8px;
-        cursor: pointer;
-        transition: background 0.2s, box-shadow 0.2s;
-        box-shadow: 0 2px 8px #e3e3f3;
-    }
-    .signup-btn:hover {
-        background: linear-gradient(90deg, #007bff 0%, #4f8cff 100%);
-        box-shadow: 0 4px 16px #d3e3ff;
-    }
-    .butt {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-</style>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <?php $this->load->view("includes/header.php"); ?>
 
-<div class="">
-    <!-- <pre style="color:black;padding: 10px;margin: 10px; width:600px; border: 1px solid black"><?php print_r(
-    	$this->session->all_userdata()
-    ); ?></pre> --> 
-
-   <?php $this->load->view("includes/header.php"); ?>
-
-	<?php if (!empty($this->session->userdata("username"))): ?>
-        <div class="flex item-center justify-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-            <h2 style="margin: 0; font-size: 1.5rem; font-weight: 600;">
-                Welcome,
-                	<?= $this->session->userdata("username")
-                 ?>
-                <span style="font-size: 1rem; font-weight: 400; opacity: 0.9;">(<?= 
-                	$this->session->userdata("role")
-                 ?>)</span>
+    <?php if (!empty($this->session->userdata("username"))): ?>
+        <div class="flex justify-center items-center bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-4 shadow-md mb-6">
+            <h2 class="text-xl font-semibold">
+                Welcome, <?= $this->session->userdata("username") ?>
+                <span class="text-base font-normal opacity-90">(<?= $this->session->userdata("role") ?>)</span>
             </h2>
         </div>
     <?php endif; ?>
 
-	<div class="butt" style="justify-content: center; align-items: center; flex-wrap: wrap;">
-    <div class="p-2 m-2 text-3xl font-black">TEACHER SIDE STUDENT LIST</div>
-   <table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Roll No</th>
-            <th>Section</th>
-            <th>Class</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Gender</th>
-            <th>DOB</th>
-            <th>Science</th>
-            <th>Mathematics</th>
-            <th>Hindi</th>
-            <th>English</th>
-            <th>Social Science</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= $user["student_name"] ?></td>
-                <td><?= $user["roll_no"] ?></td>
-                <td><?= $user["section"] ?></td>
-                <td><?= $user["class"] ?></td>
-                <td><?= $user["email"] ?></td>
-                <td><?= $user["phone"] ?></td>
-                <td><?= $user["address"] ?></td>
-                <td><?= $user["gender"] ?></td>
-                <td><?= $user["dob"] ?></td>
-                <td><?= $user["science"] ?></td>
-                <td><?= $user["mathematics"] ?></td>
-                <td><?= $user["hindi"] ?></td>
-                <td><?= $user["english"] ?></td>
-                <td><?= $user["social science"] ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
-</div>
+    <div class="flex flex-col items-center px-4 md:px-10 py-6">
+        <div class="text-3xl font-black mb-4 text-center">TEACHER DESHBOARD</div>
+
+        <div class="w-full overflow-auto">
+            <table class="min-w-full bg-white border border-gray-200 shadow-sm text-sm rounded-lg">
+                <thead class="bg-gray-100 text-gray-700 uppercase text-xs font-semibold">
+                    <tr>
+                        <th class="px-4 py-2 border">Name</th>
+                        <th class="px-4 py-2 border">Roll No</th>
+                        <th class="px-4 py-2 border">Section</th>
+                        <th class="px-4 py-2 border">Class</th>
+                        <th class="px-4 py-2 border">Email</th>
+                        <th class="px-4 py-2 border">Phone</th>
+                        <th class="px-4 py-2 border">Address</th>
+                        <th class="px-4 py-2 border">Gender</th>
+                        <th class="px-4 py-2 border">DOB</th>
+                        <th class="px-4 py-2 border">Science</th>
+                        <th class="px-4 py-2 border">Mathematics</th>
+                        <th class="px-4 py-2 border">Hindi</th>
+                        <th class="px-4 py-2 border">English</th>
+                        <th class="px-4 py-2 border">Social Science</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">
+                    <?php foreach ($users as $user): ?>
+                        <tr class="hover:bg-blue-50 even:bg-gray-50 transition-all">
+                            <td class="px-4 py-2 border"><?= $user["student_name"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["roll_no"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["section"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["class"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["email"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["phone"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["address"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["gender"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["dob"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["science"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["mathematics"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["hindi"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["english"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["social science"] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
