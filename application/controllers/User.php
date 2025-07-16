@@ -13,6 +13,12 @@ class User extends CI_Controller
 		$this->load->view("index", $data);
 	}
 
+	// Displays the access denied page
+	public function access_denied()
+	{
+		$this->load->view("access_denied");
+	}
+
 	// Shows the form to create a new user
 	public function register()
 	{

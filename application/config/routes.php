@@ -60,6 +60,7 @@ $route["register"] = "user/register";
 $route["login"] = "user/login";
 $route["logout"] = "user/logout";
 $route["auth"] = "user/auth";
+$route["access_denied"] = "user/access_denied";
 
 // User management routes
 $route["store"] = "user/store";
