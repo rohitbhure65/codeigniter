@@ -103,6 +103,8 @@
                     <th>Address</th>
                     <th>Gender</th>
                     <th>DOB</th>
+                    <th></th>
+                    <th>Science</th>
                    
                 </tr>
             </thead>
@@ -118,6 +120,8 @@
                         <td><?= $user["address"] ?></td>
                         <td><?= $user["gender"] ?></td>
                         <td><?= $user["dob"] ?></td>
+                        <td>-</td>
+                        <td><?= $user["science"] ?></td>
                       
                     </tr>
                 <?php endforeach; ?>
