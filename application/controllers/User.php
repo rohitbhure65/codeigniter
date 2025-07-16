@@ -113,7 +113,7 @@ class User extends CI_Controller
 					redirect("/");
 				}else{
 					redirect("deshboard");
-        }
+        		}
 			} else {
 				$this->session->set_flashdata(
 					"error",
@@ -155,7 +155,11 @@ class User extends CI_Controller
 				"role" => $user->role,
 			];
 			$this->session->set_userdata($newdata);
-			redirect("index");
+			if ($this->session->userdata('role') != 'teacher') {
+					redirect("/");
+			}else{
+					redirect("deshboard");
+        	}
 		}
 	}
 
