@@ -20,6 +20,12 @@ class Marks extends CI_Controller {
         }
     }
 
+    public function index() {
+        $data = [];
+        $data["users"] = $this->MarksModel->get_all_users();
+        $this->load->view("teacher/index", $data);
+    }
+
     public function insert(){
         // This method shows the insert form 
         $this->load->view("marks/insert");
