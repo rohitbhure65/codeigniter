@@ -17,8 +17,4 @@ class StudentModel extends CI_Model {
     public function update_student($id, $data) {
         return $this->db->where('id', $id)->update('students', $data);
     }
-
-    public function delete_student($id) {
-        return $this->db->where('id', $id)->delete('students');
-    }
 }

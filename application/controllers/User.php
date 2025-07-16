@@ -4,7 +4,14 @@ defined("BASEPATH") or exit("No direct script access allowed");
 
 // Defines the User controller, extending CodeIgniter's base controller
 class User extends CI_Controller
-{	
+{
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model("User_model");
+		$this->load->library("session");
+	}
+
 	// Displays the list of users
 	public function index()
 	{
@@ -32,65 +39,83 @@ class User extends CI_Controller
 		$this->load->library("form_validation");
 		$this->load->helper("form");
 
-		// Get form data
-		$name = $this->input->post("name");
-		$email = $this->input->post("email");
-		$password = $this->input->post("password");
-		$phone = $this->input->post("phone");
-		$address = $this->input->post("address");
-		$role = $this->input->post("role");
-		$gender = $this->input->post("gender");
-		$dob = $this->input->post("dob");
-	$this->form_validation->set_rules(
+		// Set validation rules
+		$this->form_validation->set_rules(
 			"name",
 			"Name",
-			"required|min_length[3]"
+			"required|min_length[3]",
 		);
 		$this->form_validation->set_rules(
 			"password",
 			"Password",
-			"required|min_length[8]|trim"
+			"required|min_length[8]|trim",
 		);
 		$this->form_validation->set_rules(
 			"email",
 			"Email",
-			"required|valid_email|is_unique[users.email]"
+			"required|valid_email|is_unique[users.email]",
 		);
 		$this->form_validation->set_rules(
 			"phone",
 			"Phone",
-			"required|numeric|is_unique[users.phone]|min_length[10]|max_length[10]"
+			"required|numeric|is_unique[users.phone]|min_length[10]|max_length[10]",
 		);
 		$this->form_validation->set_rules("address", "Address", "required");
-		$this->form_validation->set_rules("role", "Role", "required");
-		$this->form_validation->set_rules("gender", "Gender", "required");
+		$this->form_validation->set_rules(
+			"role",
+			"Role",
+			"required|in_list[student,teacher]",
+		);
+		$this->form_validation->set_rules(
+			"gender",
+			"Gender",
+			"required|in_list[MALE,FEMALE]",
+		);
 		$this->form_validation->set_rules("dob", "DOB", "required");
 
 		if ($this->form_validation->run() == false) {
 			$this->load->view("register");
 		} else {
-		// Save user data
-		$data = [
-			"name" => $name,
-			"email" => $email,
-			"password" => password_hash($password, PASSWORD_BCRYPT),
-			"phone" => $phone,
-			"address" => $address,
-			"role" => $role,
-			"gender" => $gender,
-			"dob" => $dob,
-		];
+			// Get form data
+			$name = $this->input->post("name");
+			$email = $this->input->post("email");
+			$password = $this->input->post("password");
+			$phone = $this->input->post("phone");
+			$address = $this->input->post("address");
+			$role = $this->input->post("role");
+			$gender = $this->input->post("gender");
+			$dob = $this->input->post("dob");
 
-		$newdata = [
-			"username" => $name,
-			"email" => $email,
-			"role" => $role,
-		];
-		$this->session->set_userdata($newdata);
+			// Save user data
+			$data = [
+				"name" => $name,
+				"email" => $email,
+				"password" => password_hash($password, PASSWORD_BCRYPT),
+				"phone" => $phone,
+				"address" => $address,
+				"role" => $role,
+				"gender" => $gender,
+				"dob" => $dob,
+			];
 
-		$this->User_model->insert_user($data);
-		redirect("user");
-	}
+			$result = $this->User_model->insert_user($data);
+
+			if ($result) {
+				$newdata = [
+					"username" => $name,
+					"email" => $email,
+					"role" => $role,
+				];
+				$this->session->set_userdata($newdata);
+				redirect("user");
+			} else {
+				$this->session->set_flashdata(
+					"error",
+					"Registration failed. Please try again.",
+				);
+				redirect("register");
+			}
+		}
 	}
 
 	public function login()
@@ -116,7 +141,7 @@ class User extends CI_Controller
 			$data["email"] = $email;
 			$this->load->view("login", $data);
 			return;
-		}else{
+		} else {
 			// Login successful
 			$newdata = [
 				"username" => $user->name,
@@ -145,17 +170,17 @@ class User extends CI_Controller
 		$this->form_validation->set_rules(
 			"name",
 			"Name",
-			"required|min_length[3]"
+			"required|min_length[3]",
 		);
 		$this->form_validation->set_rules(
 			"email",
 			"Email",
-			"required|valid_email"
+			"required|valid_email",
 		);
 		$this->form_validation->set_rules(
 			"phone",
 			"Phone",
-			"required|numeric|min_length[10]|max_length[10]"
+			"required|numeric|min_length[10]|max_length[10]",
 		);
 		$this->form_validation->set_rules("address", "Address", "required");
 		$this->form_validation->set_rules("gender", "Gender", "required");

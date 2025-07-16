@@ -15,5 +15,9 @@
     <h1>Access Denied</h1>
     <p>You do not have permission to access this page.</p>
     <p>If you believe this is an error, please contact the system administrator.</p>
-    <p><a href="<?php echo site_url('/'); ?>">Return to Home</a></p>
-</div>
+    <p><a href="<?php echo site_url("/"); ?>">Return to Home</a></p>
+</div><script>
+    setTimeout(function() {
+        window.location.href = "<?php echo site_url("/"); ?>";
+    }, 3000);
+</script>
