@@ -72,5 +72,5 @@ $route["delete/(:num)"] = 'user/delete/$1';
 $route["insert"] = "marks/insert";
 
 // teacher routes
-$route["deshboard"] = "marks/index";
+$route["dashboard"] = "marks/index";
 
