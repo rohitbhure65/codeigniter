@@ -7,22 +7,20 @@ class Marks extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('MarksModel');
-        $this->load->helper("form");
-        $this->load->helper("url");
-        // Load your marks model here when you create it
-        // $this->load->model('MarksModel');
-    }
-
-    public function insert(){
         if (!$this->session->userdata('email')) {
             redirect('login');
         }
 
         if ($this->session->userdata('role') != 'teacher') {
-            redirect("/");
+            redirect("access_denied");
+        }else{
+            $this->load->model('MarksModel');
+            $this->load->helper("form");
+            $this->load->helper("url");
         }
+    }
 
+    public function insert(){
         // This method shows the insert form
         $this->load->view("marks/insert");
     }

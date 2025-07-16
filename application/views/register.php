@@ -92,8 +92,9 @@
         background: #f8f8fa url('data:image/svg+xml;utf8,<svg fill="gray" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 9px center/16px 16px;
     }
 </style>
+
 <section>
-    <h2>Create User</h2>
+    <h2>Signup</h2>
     <form action="<?= site_url('store') ?>" method="post">
        <label>Name:</label>
     <input type="text" name="name" value="<?= set_value('name') ?>">
