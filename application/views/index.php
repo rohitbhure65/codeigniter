@@ -20,7 +20,7 @@
     <?php endif; ?>
 
     <div class="flex flex-col items-center px-4 md:px-10 py-6">
-        <div class="text-3xl font-black mb-4 text-center">STUDENT LIST</div>
+        <div class="text-3xl font-black mb-4 text-center">STUDENT PROFILE</div>
 
         <div class="w-full overflow-auto">
             <table class="min-w-full bg-white border border-gray-200 shadow-sm text-sm rounded-lg">

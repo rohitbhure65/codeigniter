@@ -15,9 +15,19 @@ class User extends CI_Controller
 	// Displays the list of users
 	public function index()
 	{
-		if (!$this->session->userdata('email')) redirect('register');
+
+		if (!$this->session->userdata('email')) {
+			redirect('register');
+		}
+
+		if ($this->session->userdata('role') != 'student') {
+			redirect("access_denied");
+		}
+
 		$data = [];
-		$data["users"] = $this->User_model->get_current_u();
+
+		$current_user = $this->User_model->get_current_u($this->session->userdata('email'));
+		$data["users"] = $current_user ? [$current_user] : [];
 		$this->load->view("index", $data);
 	}
 

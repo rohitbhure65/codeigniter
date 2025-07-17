@@ -3,57 +3,42 @@ defined("BASEPATH") or exit("No direct script access allowed");
 
 class User_model extends CI_Model
 {
-	public function get_current_u()
-	{
-		$sql = "
-SELECT
-    u.id AS user_id,
-    u.name AS student_name,
-    u.email,
-    u.phone,
-    u.address,
-    u.gender,
-    u.dob,
-    st.id AS student_id,
-    st.roll_no,
-    st.section,
-    st.class,
-    m.science,
-    m.mathematics,
-    m.hindi,
-    m.english,
-    m.`sst`
-FROM
-    users u
-JOIN students st ON
-    u.id = st.user_id
-LEFT JOIN marks m ON
-    st.id = m.student_id
-GROUP BY
-    u.id,
-    st.id,
-    u.name,
-    u.email,
-    u.phone,
-    u.address,
-    u.gender,
-    u.dob,
-    st.roll_no,
-    st.section,
-    st.class,
-    m.science,
-    m.mathematics,
-    m.hindi,
-    m.english,
-    m.`sst`
-ORDER BY
-    u.id,
-    st.id;
+public function get_current_u($email)
+{
+    // Using Query Binding for security
+    $sql = "
+        SELECT
+            u.id AS user_id,
+            u.name AS student_name,
+            u.email,
+            u.phone,
+            u.address,
+            u.gender,
+            u.dob,
+            st.id AS student_id,
+            st.roll_no,
+            st.section,
+            st.class,
+            m.science,
+            m.mathematics,
+            m.hindi,
+            m.english,
+            m.sst
+        FROM
+            users u
+        JOIN students st ON
+            u.id = st.user_id
+        LEFT JOIN marks m ON
+            st.id = m.student_id
+        WHERE 
+            u.email = ?
+        ORDER BY
+            u.id, st.id
     ";
-		$query = $this->db->query($sql);
-		return $query->result_array();
-	}
-
+    
+    $query = $this->db->query($sql, [$email]);
+    return $query->row_array(); // Changed to row_array() since we're querying by email (should be unique)
+}
 	public function insert_user($data)
 	{
 		return $this->db->insert("users", $data);
