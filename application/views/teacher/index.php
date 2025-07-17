@@ -64,7 +64,7 @@
                             <td class="px-4 py-2 border"><?= $user["english"] ?></td>
                             <td class="px-4 py-2 border"><?= $user["social science"] ?></td>
                             <td class="px-4 py-2 border">
-                               <a href="<?= base_url('marks/insert/' . $user['user_id']) ?>">
+                               <a href="<?= base_url('marks/insert/' . $user['roll_no']) ?>">
                                 <button class="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105">
                                     Edit
                                 </button>
