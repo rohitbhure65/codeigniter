@@ -21,7 +21,7 @@ class User extends CI_Controller
 		}
 
 		if ($this->session->userdata('role') != 'student') {
-			redirect("access_denied");
+			redirect("dashboard");
 		}
 
 		$data = [];
