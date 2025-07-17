@@ -21,11 +21,13 @@
 
     <div class="flex flex-col items-center px-4 md:px-10 py-6">
         <div class="text-3xl font-black mb-4 text-center">STUDENT PROFILE</div>
-
+        <?php
+            $url = $this->session->userdata("user_id");
+        ?>
         <?php if (empty($users)): ?>
             <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md text-center">
                 <p class="text-lg text-gray-600 mb-6">You are not registered in any class</p>
-                <a href="<?= base_url('student/profile/') ?>" 
+                <a href="<?= base_url('profile/'. $url) ?>" 
                    class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
                    Edit profile
                 </a>
@@ -49,7 +51,7 @@
                             <th class="px-4 py-2 border">Hindi</th>
                             <th class="px-4 py-2 border">English</th>
                             <th class="px-4 py-2 border">SST</th>
-                            <th class="px-4 py-2 border">Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody class="text-gray-700">
@@ -69,12 +71,7 @@
                                 <td class="px-4 py-2 border"><?= $user["hindi"] ?></td>
                                 <td class="px-4 py-2 border"><?= $user["english"] ?></td>
                                 <td class="px-4 py-2 border"><?= $user["sst"] ?></td>
-                                <td class="px-4 py-2 border">
-                                    <a href="<?= base_url('student/profile/'.$user['user_id']) ?>" 
-                                       class="text-blue-600 hover:text-blue-800 hover:underline">
-                                        View Profile
-                                    </a>
-                                </td>
+                            
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

@@ -113,9 +113,10 @@ class User extends CI_Controller
 
 			if ($result) {
 				$newdata = [
-					"username" => $name,
-					"email" => $email,
-					"role" => $role,
+				"user_id" => $user->id,
+				"username" => $user->name,
+				"email" => $user->email,
+				"role" => $user->role,
 				];
 				$this->session->set_userdata($newdata);
 			
@@ -160,6 +161,7 @@ class User extends CI_Controller
 		} else {
 			// Login successful
 			$newdata = [
+				"user_id" => $user->id,
 				"username" => $user->name,
 				"email" => $user->email,
 				"role" => $user->role,
