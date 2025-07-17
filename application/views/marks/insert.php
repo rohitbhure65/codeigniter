@@ -14,45 +14,69 @@
     <!-- form -->
     <main class="flex-grow flex items-center justify-center py-10 px-4">
         <div class="bg-white shadow-md rounded px-6 py-8 w-full max-w-md">
-            <h1 class="text-2xl font-bold text-center mb-6">Insert Marks</h1>
+            <h1 class="text-2xl font-bold text-center mb-6">Insert/Update Marks</h1>
 
-            <form action="<?php echo base_url('marks/store/' . $user['roll_no']); ?>" method="post" class="space-y-4">
-                
-                <!-- Student Roll No -->
+            <form action="<?php echo base_url('marks/store/' . $user['student_id']); ?>" method="post" class="space-y-4">
+
+                <!-- Roll No -->
                 <div>
-                    <label for="student_name" class="block text-gray-700 font-medium mb-1">Student Roll No:</label>
-                    <input type="text" id="student_name" name="student_name" 
-                           value="<?= $user['roll_no'] ?? '' ?>" readonly
-                           class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="roll_no" class="block text-gray-700 font-medium mb-1">Student Roll No:</label>
+                    <input type="text" id="roll_no" name="roll_no"
+                           value="<?= $user['roll_no'] ?>" readonly
+                           class="w-full px-4 py-2 border border-gray-300 rounded bg-gray-100 cursor-not-allowed">
                 </div>
 
-                <!-- Subject Dropdown -->
+                <!-- Name -->
                 <div>
-                    <label for="subject" class="block text-gray-700 font-medium mb-1">Subject:</label>
-                    <select name="subject" id="subject" required 
-                            class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="" <?= set_value("subject") == "" ? "selected" : "" ?>>Select</option>
-                        <option value="science" <?= set_value("subject") == "science" ? "selected" : "" ?>>Science</option>
-                        <option value="hindi" <?= set_value("subject") == "hindi" ? "selected" : "" ?>>Hindi</option>
-                        <option value="mathematics" <?= set_value("subject") == "mathematics" ? "selected" : "" ?>>Mathematics</option>
-                        <option value="english" <?= set_value("subject") == "english" ? "selected" : "" ?>>English</option>
-                        <option value="social science" <?= set_value("subject") == "social science" ? "selected" : "" ?>>Social Science</option>
-                    </select>
-                    <?php echo form_error("subject"); ?>
+                    <label for="student_name" class="block text-gray-700 font-medium mb-1">Student Name:</label>
+                    <input type="text" id="student_name" name="student_name"
+                           value="<?= $user['student_name'] ?>" readonly
+                           class="w-full px-4 py-2 border border-gray-300 rounded bg-gray-100 cursor-not-allowed">
                 </div>
 
-                <!-- Marks Input -->
+                <!-- Science -->
                 <div>
-                    <label for="marks" class="block text-gray-700 font-medium mb-1">Marks:</label>
-                    <input type="number" id="marks" name="marks" min="0" max="100" required
-                           value="<?= set_value('marks') ?>"
-                           class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <?php echo form_error("marks"); ?>
+                    <label for="science" class="block text-gray-700 font-medium mb-1">Science:</label>
+                    <input type="number" id="science" name="science" min="0" max="100"
+                           value="<?= $user['science'] ?? '' ?>"
+                           class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-blue-500">
                 </div>
 
-                <!-- Submit Button -->
+                <!-- Mathematics -->
                 <div>
-                    <input type="submit" value="Insert Marks"
+                    <label for="mathematics" class="block text-gray-700 font-medium mb-1">Mathematics:</label>
+                    <input type="number" id="mathematics" name="mathematics" min="0" max="100"
+                           value="<?= $user['mathematics'] ?? '' ?>"
+                           class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-blue-500">
+                </div>
+
+                <!-- Hindi -->
+                <div>
+                    <label for="hindi" class="block text-gray-700 font-medium mb-1">Hindi:</label>
+                    <input type="number" id="hindi" name="hindi" min="0" max="100"
+                           value="<?= $user['hindi'] ?? '' ?>"
+                           class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-blue-500">
+                </div>
+
+                <!-- English -->
+                <div>
+                    <label for="english" class="block text-gray-700 font-medium mb-1">English:</label>
+                    <input type="number" id="english" name="english" min="0" max="100"
+                           value="<?= $user['english'] ?? '' ?>"
+                           class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-blue-500">
+                </div>
+
+                <!-- Social Science -->
+                <div>
+                    <label for="social_science" class="block text-gray-700 font-medium mb-1">Social Science:</label>
+                    <input type="number" id="social_science" name="social_science" min="0" max="100"
+                           value="<?= $user['social science'] ?? '' ?>"
+                           class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-blue-500">
+                </div>
+
+                <!-- Submit -->
+                <div>
+                    <input type="submit" value="Save Marks"
                            class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-semibold cursor-pointer">
                 </div>
             </form>
