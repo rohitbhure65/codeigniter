@@ -33,32 +33,38 @@ class Marks extends CI_Controller {
     }
 
 
-    public function store($student_id) {
+    public function store($roll_no) {
         $this->load->library('form_validation');
 
-        // Validation rules for all subjects
+        // Validation rules
         $this->form_validation->set_rules('science', 'Science', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
         $this->form_validation->set_rules('mathematics', 'Mathematics', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
         $this->form_validation->set_rules('hindi', 'Hindi', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
         $this->form_validation->set_rules('english', 'English', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
-        $this->form_validation->set_rules(`social science`, 'Social Science', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
+        $this->form_validation->set_rules('social science', 'Social Science', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
+
+        // Get student_id by roll_no
+        $user = $this->MarksModel->get_user($roll_no);
+
+        if (!$user) {
+            show_error("Student not found for roll number: " . $roll_no);
+            return;
+        }
+        $student_id = $user['student_id'];
 
         if ($this->form_validation->run() == FALSE) {
-            // Reload form with validation errors
-            $data['user'] = $this->MarksModel->get_user($student_id);
+            $data['user'] = $user;
             $this->load->view('marks/insert', $data);
         } else {
-            // Get sanitized input
             $data = [
                 'student_id' => $student_id,
                 'science' => $this->input->post('science', TRUE),
                 'mathematics' => $this->input->post('mathematics', TRUE),
                 'hindi' => $this->input->post('hindi', TRUE),
                 'english' => $this->input->post('english', TRUE),
-                `social science` => $this->input->post(`social science`, TRUE),
+                'social science' => $this->input->post('social_science', TRUE),
             ];
 
-            // Insert or Update
             $existing = $this->db->get_where('marks', ['student_id' => $student_id])->row();
 
             if ($existing) {
@@ -70,6 +76,7 @@ class Marks extends CI_Controller {
             redirect('marks');
         }
     }
+
 
     public function edit($id){
         $this->load->view("marks/edit", ["id" => $id]); 
