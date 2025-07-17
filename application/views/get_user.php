@@ -107,7 +107,7 @@
             <th>Mathematics</th>
             <th>Hindi</th>
             <th>English</th>
-            <th>Social Science</th>
+            <th>sst</th>
         </tr>
     </thead>
     <tbody>
@@ -126,7 +126,7 @@
                 <td><?= $user["mathematics"] ?></td>
                 <td><?= $user["hindi"] ?></td>
                 <td><?= $user["english"] ?></td>
-                <td><?= $user["social science"] ?></td>
+                <td><?= $user["sst"] ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

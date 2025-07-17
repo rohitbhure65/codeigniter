@@ -74,3 +74,8 @@ $route["insert"] = "marks/insert";
 // teacher routes
 $route["dashboard"] = "marks/index";
 
+// Student routes
+$route["profile"] = "StudentController/profile";
+$route["student/profile"] = "StudentController/profile"; 
+$route["student/profile/(:num)"] = "StudentController/profile/$1";
+$route["profile/(:num)"] = "StudentController/profile/$1";

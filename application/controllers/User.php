@@ -15,9 +15,19 @@ class User extends CI_Controller
 	// Displays the list of users
 	public function index()
 	{
-		if (!$this->session->userdata('email')) redirect('register');
+
+		if (!$this->session->userdata('email')) {
+			redirect('register');
+		}
+
+		if ($this->session->userdata('role') != 'student') {
+			redirect("dashboard");
+		}
+
 		$data = [];
-		$data["users"] = $this->User_model->get_all_users();
+
+		$current_user = $this->User_model->get_current_u($this->session->userdata('email'));
+		$data["users"] = $current_user ? [$current_user] : [];
 		$this->load->view("index", $data);
 	}
 
@@ -103,9 +113,10 @@ class User extends CI_Controller
 
 			if ($result) {
 				$newdata = [
-					"username" => $name,
-					"email" => $email,
-					"role" => $role,
+				"user_id" => $user->id,
+				"username" => $user->name,
+				"email" => $user->email,
+				"role" => $user->role,
 				];
 				$this->session->set_userdata($newdata);
 			
@@ -150,6 +161,7 @@ class User extends CI_Controller
 		} else {
 			// Login successful
 			$newdata = [
+				"user_id" => $user->id,
 				"username" => $user->name,
 				"email" => $user->email,
 				"role" => $user->role,
