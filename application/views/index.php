@@ -22,12 +22,12 @@
     <div class="flex flex-col items-center px-4 md:px-10 py-6">
         <div class="text-3xl font-black mb-4 text-center">STUDENT PROFILE</div>
         <?php
-            $url = $this->session->userdata("user_id");
+            $user_id = $this->session->userdata("user_id");
         ?>
         <?php if (empty($users)): ?>
             <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md text-center">
                 <p class="text-lg text-gray-600 mb-6">You are not registered in any class</p>
-                <a href="<?= base_url('profile/'. $url) ?>" 
+                <a href="<?= base_url('profile/'. $user_id) ?>" 
                    class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
                    Edit profile
                 </a>

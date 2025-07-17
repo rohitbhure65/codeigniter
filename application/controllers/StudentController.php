@@ -8,12 +8,28 @@ class StudentController extends CI_Controller {
         $this->load->model('StudentModel');
     }
 
-    public function profile(){
-        $this->load->view('student/profile');
+    public function profile($user_id = null){
+        $data = [];
+        if ($user_id !== null) {
+            $this->load->model('StudentModel');
+            $student = $this->StudentModel->get_student_by_user_id($user_id);
+            if ($student) {
+                $data['student'] = $student;
+            }
+        }
+        $this->load->view('student/profile', $data);
     }
     
     public function create() {
-        if ($this->StudentModel->create_student($this->session->userdata("user_id"))) {
+        $user_id = $this->session->userdata("user_id");
+        if (!$user_id) {
+            $this->session->set_flashdata('error', 'User ID not found in session');
+            redirect('student/profile');
+            return;
+        }
+
+        $insert_id = $this->StudentModel->create_student($user_id);
+        if ($insert_id) {
             $this->session->set_flashdata('success', 'Student created successfully');
         } else {
             $this->session->set_flashdata('error', 'Failed to create student');
