@@ -55,7 +55,7 @@ public function store($roll_no) {
             'mathematics' => $this->input->post('mathematics', TRUE),
             'hindi' => $this->input->post('hindi', TRUE),
             'english' => $this->input->post('english', TRUE),
-            'sst' => $this->input->post('social_science', TRUE),
+            'sst' => $this->input->post('sst', TRUE),
         ];
 
         // Insert or Update
