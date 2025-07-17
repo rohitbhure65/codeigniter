@@ -34,10 +34,34 @@ class Marks extends CI_Controller {
 
 
     public function store($id){
-        $data = $this->input->post();
-        $data['student_id'] = $id;
-        $this->MarksModel->insert_marks($data);
-        redirect('marks');
+        $this->load->library("form_validation");
+		$this->load->helper("form");
+		$this->form_validation->set_rules(
+			"roll_no",
+			"Roll_no",
+			"required",
+		);		
+        $this->form_validation->set_rules(
+			"subject",
+			"Subject",
+			"required",
+		);
+        $this->form_validation->set_rules(
+			"marks",
+			"Marks",
+			"required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]",
+		);
+
+        if ($this->form_validation->run() == false) {
+            $data = [];
+            $data["user"] = $this->MarksModel->get_user($id);
+            $this->load->view("marks/insert", $data);
+		} else {
+            $data = $this->input->post();
+            $data['student_id'] = $id;
+            $this->MarksModel->insert_marks($data);
+            redirect('marks');
+		}
     }
 
 
