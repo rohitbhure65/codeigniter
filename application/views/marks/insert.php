@@ -68,8 +68,8 @@
 
                 <!-- Social Science -->
                 <div>
-                    <label for="social_science" class="block text-gray-700 font-medium mb-1">Social Science:</label>
-                    <input type="number" id="social_science" name="social_science" min="0" max="100"
+                    <label for="social science" class="block text-gray-700 font-medium mb-1">Social Science:</label>
+                    <input type="number" id="social science" name="social science" min="0" max="100"
                            value="<?= $user['social science'] ?? '' ?>"
                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-blue-500">
                 </div>

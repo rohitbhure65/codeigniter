@@ -33,37 +33,43 @@ class Marks extends CI_Controller {
     }
 
 
-    public function store($id){
-        $this->load->library("form_validation");
-		$this->load->helper("form");
-		$this->form_validation->set_rules(
-			"roll_no",
-			"Roll_no",
-			"required",
-		);		
-        $this->form_validation->set_rules(
-			"subject",
-			"Subject",
-			"required",
-		);
-        $this->form_validation->set_rules(
-			"marks",
-			"Marks",
-			"required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]",
-		);
+    public function store($student_id) {
+        $this->load->library('form_validation');
 
-        if ($this->form_validation->run() == false) {
-            $data = [];
-            $data["user"] = $this->MarksModel->get_user($id);
-            $this->load->view("marks/insert", $data);
-		} else {
-            $data = $this->input->post();
-            $data['student_id'] = $id;
-            $this->MarksModel->insert_marks($data);
+        // Validation rules for all subjects
+        $this->form_validation->set_rules('science', 'Science', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
+        $this->form_validation->set_rules('mathematics', 'Mathematics', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
+        $this->form_validation->set_rules('hindi', 'Hindi', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
+        $this->form_validation->set_rules('english', 'English', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
+        $this->form_validation->set_rules(`social science`, 'Social Science', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
+
+        if ($this->form_validation->run() == FALSE) {
+            // Reload form with validation errors
+            $data['user'] = $this->MarksModel->get_user($student_id);
+            $this->load->view('marks/insert', $data);
+        } else {
+            // Get sanitized input
+            $data = [
+                'student_id' => $student_id,
+                'science' => $this->input->post('science', TRUE),
+                'mathematics' => $this->input->post('mathematics', TRUE),
+                'hindi' => $this->input->post('hindi', TRUE),
+                'english' => $this->input->post('english', TRUE),
+                `social science` => $this->input->post(`social science`, TRUE),
+            ];
+
+            // Insert or Update
+            $existing = $this->db->get_where('marks', ['student_id' => $student_id])->row();
+
+            if ($existing) {
+                $this->MarksModel->update_marks($existing->id, $data);
+            } else {
+                $this->MarksModel->insert_marks($data);
+            }
+
             redirect('marks');
-		}
+        }
     }
-
 
     public function edit($id){
         $this->load->view("marks/edit", ["id" => $id]); 
