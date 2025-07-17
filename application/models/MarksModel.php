@@ -54,6 +54,60 @@ ORDER BY
 		return $query->result_array();
 	}
 
+public function get_user($id)
+{
+    $sql = "
+    SELECT
+        u.id AS user_id,
+        u.name AS student_name,
+        u.email,
+        u.phone,
+        u.address,
+        u.gender,
+        u.dob,
+        st.id AS student_id,
+        st.roll_no,
+        st.section,
+        st.class,
+        m.science,
+        m.mathematics,
+        m.hindi,
+        m.english,
+        m.`social science`
+    FROM
+        users u
+    JOIN students st ON
+        u.id = st.user_id
+    LEFT JOIN marks m ON
+        st.id = m.student_id
+    WHERE
+        st.roll_no = $id
+    GROUP BY
+        u.id,
+        st.id,
+        u.name,
+        u.email,
+        u.phone,
+        u.address,
+        u.gender,
+        u.dob,
+        st.roll_no,
+        st.section,
+        st.class,
+        m.science,
+        m.mathematics,
+        m.hindi,
+        m.english,
+        m.`social science`
+    ORDER BY
+        u.id,
+        st.id
+    ";
+
+    $query = $this->db->query($sql, [$id]);
+    return $query->row_array();
+}
+
     public function insert_marks($data) {
         return $this->db->insert('marks', $data);
     }

@@ -16,11 +16,12 @@
         <div class="bg-white shadow-md rounded px-6 py-8 w-full max-w-md">
             <h1 class="text-2xl font-bold text-center mb-6">Insert Marks</h1>
 
-            <form action="<?php echo base_url('marks/store'); ?>" method="post" class="space-y-4">
+           <form action="<?php echo base_url('marks/store/' . $user['student_id']); ?>" method="post" class="space-y-4">
                 <div>
                     <label for="student_name" class="block text-gray-700 font-medium mb-1">Student Roll No:</label>
-                    <input type="text" id="student_name" name="student_name" required
-                           class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <input type="text" id="student_name" name="student_name" 
+       value="<?= $user['roll_no'] ?? '' ?>"
+       class="w-full px-4 py-2 border ...">
                 </div>
 
                 <div>

@@ -26,16 +26,20 @@ class Marks extends CI_Controller {
         $this->load->view("teacher/index", $data);
     }
 
-    public function insert(){
-        // This method shows the insert form 
-        $this->load->view("marks/insert");
+    public function insert($id){
+        $data = [];
+        $data["user"] = $this->MarksModel->get_user($id);
+        $this->load->view("marks/insert", $data);
     }
 
-    public function store(){
+
+    public function store($id){
         $data = $this->input->post();
+        $data['student_id'] = $id;
         $this->MarksModel->insert_marks($data);
-        redirect('marks/insert');
+        redirect('marks');
     }
+
 
     public function edit($id){
         $this->load->view("marks/edit", ["id" => $id]); 
