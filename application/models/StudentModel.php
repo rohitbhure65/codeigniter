@@ -8,4 +8,7 @@ class StudentModel extends CI_Model {
         return $this->db->insert('marks', $data);
     }
 
+    public function create_student($user_id) {
+        return $this->db->insert('students', ["user_id" => $user_id])->row();
+    }
 }
