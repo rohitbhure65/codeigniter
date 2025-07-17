@@ -25,9 +25,9 @@
         <?php if (empty($users)): ?>
             <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md text-center">
                 <p class="text-lg text-gray-600 mb-6">You are not registered in any class</p>
-                <a href="<?= base_url('student/register/') ?>" 
+                <a href="<?= base_url('student/profile/') ?>" 
                    class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
-                    Register as a Student
+                   Edit profile
                 </a>
             </div>
         <?php else: ?>
