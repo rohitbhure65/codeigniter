@@ -72,6 +72,7 @@
                     <input type="number" id="sst" name="sst" min="0" max="100"
                            value="<?= $user['sst'] ?? '' ?>"
                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-blue-500">
+                           <?php echo form_error("sst"); ?>
                 </div>
 
                 <!-- Submit -->
