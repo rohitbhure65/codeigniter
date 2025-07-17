@@ -39,7 +39,7 @@
                         <th class="px-4 py-2 border">Mathematics</th>
                         <th class="px-4 py-2 border">Hindi</th>
                         <th class="px-4 py-2 border">English</th>
-                        <th class="px-4 py-2 border">Social Science</th>
+                        <th class="px-4 py-2 border">sst</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700">
@@ -58,7 +58,7 @@
                             <td class="px-4 py-2 border"><?= $user["mathematics"] ?></td>
                             <td class="px-4 py-2 border"><?= $user["hindi"] ?></td>
                             <td class="px-4 py-2 border"><?= $user["english"] ?></td>
-                            <td class="px-4 py-2 border"><?= $user["social science"] ?></td>
+                            <td class="px-4 py-2 border"><?= $user["sst"] ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

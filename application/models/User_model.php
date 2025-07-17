@@ -22,7 +22,7 @@ SELECT
     m.mathematics,
     m.hindi,
     m.english,
-    m.`social science`
+    m.`sst`
 FROM
     users u
 JOIN students st ON
@@ -45,7 +45,7 @@ GROUP BY
     m.mathematics,
     m.hindi,
     m.english,
-    m.`social science`
+    m.`sst`
 ORDER BY
     u.id,
     st.id;

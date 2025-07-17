@@ -15,8 +15,8 @@
     <main class="flex-grow flex items-center justify-center py-10 px-4">
         <div class="bg-white shadow-md rounded px-6 py-8 w-full max-w-md">
             <h1 class="text-2xl font-bold text-center mb-6">Insert/Update Marks</h1>
-
-            <form action="<?php echo base_url('marks/store/' . $user['student_id']); ?>" method="post" class="space-y-4">
+            <?= print_r($user)?>
+            <form action="<?php echo base_url('marks/store/' . $user['roll_no']); ?>" method="post" class="space-y-4">
 
                 <!-- Roll No -->
                 <div>
@@ -66,11 +66,11 @@
                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-blue-500">
                 </div>
 
-                <!-- Social Science -->
+                <!-- sst -->
                 <div>
-                    <label for="social science" class="block text-gray-700 font-medium mb-1">Social Science:</label>
-                    <input type="number" id="social science" name="social science" min="0" max="100"
-                           value="<?= $user['social science'] ?? '' ?>"
+                    <label for="sst" class="block text-gray-700 font-medium mb-1">sst:</label>
+                    <input type="number" id="sst" name="sst" min="0" max="100"
+                           value="<?= $user['sst'] ?? '' ?>"
                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-blue-500">
                 </div>
 
