@@ -17,7 +17,7 @@ class User extends CI_Controller
 	{
 		if (!$this->session->userdata('email')) redirect('register');
 		$data = [];
-		$data["users"] = $this->User_model->get_all_users();
+		$data["users"] = $this->User_model->get_current_u();
 		$this->load->view("index", $data);
 	}
 
