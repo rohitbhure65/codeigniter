@@ -13,6 +13,7 @@ class MarksModel extends CI_Model {
             u.phone,
             u.address,
             u.gender,
+            u.role,
             u.dob,
             st.id AS student_id,
             st.roll_no,
@@ -26,9 +27,8 @@ class MarksModel extends CI_Model {
         FROM users u
         JOIN students st ON u.id = st.user_id
         LEFT JOIN marks m ON st.id = m.student_id
-        ORDER BY u.id, st.id
-        ";
-
+        WHERE u.role = 'student';
+";
         return $this->db->query($sql)->result_array();
     }
 
