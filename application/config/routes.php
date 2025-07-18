@@ -79,3 +79,4 @@ $route["profile"] = "StudentController/profile";
 $route["student/profile"] = "StudentController/profile"; 
 $route["student/profile/(:num)"] = "StudentController/profile/$1";
 $route["profile/(:num)"] = "StudentController/profile/$1";
+$route['student/create'] = 'StudentController/create';
