@@ -5,7 +5,6 @@ class User_model extends CI_Model
 {
 public function get_current_u($email)
 {
-    // Using Query Binding for security
     $sql = "
         SELECT
             u.id AS user_id,
@@ -37,7 +36,7 @@ public function get_current_u($email)
     ";
     
     $query = $this->db->query($sql, [$email]);
-    return $query->row_array(); // Changed to row_array() since we're querying by email (should be unique)
+    return $query->row_array();
 }
 	public function insert_user($data)
 	{
@@ -60,7 +59,6 @@ public function get_current_u($email)
 		return $this->db->update("users", $data);
 	}
 
-	// Deletes a user record by ID
 	public function delete_user($id)
 	{
 		return $this->db->delete("users", ["id" => $id]);

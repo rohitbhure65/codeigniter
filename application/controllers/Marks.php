@@ -33,14 +33,12 @@ class Marks extends CI_Controller {
     public function store($roll_no) {
         $this->load->library('form_validation');
 
-        // Validation rules for all subjects
         $this->form_validation->set_rules('science', 'Science', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
         $this->form_validation->set_rules('mathematics', 'Mathematics', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
         $this->form_validation->set_rules('hindi', 'Hindi', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
         $this->form_validation->set_rules('english', 'English', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
         $this->form_validation->set_rules('sst', 'SST', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
 
-        // Get student info first to get the student_id
         $student = $this->MarksModel->get_user($roll_no);
         
         if (!$student) {
@@ -48,11 +46,9 @@ class Marks extends CI_Controller {
         }
 
         if ($this->form_validation->run() == FALSE) {
-            // Reload form with validation errors
             $data['user'] = $student;
             $this->load->view('marks/insert', $data);
         } else {
-            // Get sanitized input
             $data = [
                 'student_id' => $student['student_id'],
                 'science' => $this->input->post('science', TRUE),
@@ -61,16 +57,12 @@ class Marks extends CI_Controller {
                 'english' => $this->input->post('english', TRUE),
                 'sst' => $this->input->post('sst', TRUE),
             ];
-
-            // Check if marks already exist for this student
             $existing = $this->db->get_where('marks', ['student_id' => $student['student_id']])->row();
 
             if ($existing) {
-                // Update existing marks
                 $this->MarksModel->update_marks($student['student_id'], $data);
                 $this->session->set_flashdata('success', 'Marks updated successfully');
             } else {
-                // Insert new marks
                 $this->MarksModel->insert_marks($data);
                 $this->session->set_flashdata('success', 'Marks added successfully');
             }

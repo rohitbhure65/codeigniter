@@ -70,6 +70,7 @@ $route["delete/(:num)"] = 'user/delete/$1';
 
 // marks management route
 $route["insert"] = "marks/insert";
+$route['marks/insert/(:num)'] = 'marks/insert/$1';
 
 // teacher routes
 $route["dashboard"] = "marks/index";
@@ -79,3 +80,4 @@ $route["profile"] = "StudentController/profile";
 $route["student/profile"] = "StudentController/profile"; 
 $route["student/profile/(:num)"] = "StudentController/profile/$1";
 $route["profile/(:num)"] = "StudentController/profile/$1";
+$route['student/create'] = 'StudentController/create';

@@ -2,7 +2,7 @@
 // Prevents direct script access
 defined("BASEPATH") or exit("No direct script access allowed");
 
-// Defines the User controller, extending CodeIgniter's base controller
+
 class User extends CI_Controller
 {
 	public function __construct()
@@ -12,7 +12,7 @@ class User extends CI_Controller
 			$this->load->library("session");
     }
 
-	// Displays the list of users
+
 	public function index()
 	{
 
@@ -31,26 +31,24 @@ class User extends CI_Controller
 		$this->load->view("index", $data);
 	}
 
-	// Displays the access denied page
+
 	public function access_denied()
 	{
 		$this->load->view("access_denied");
 	}
 
-	// Shows the form to create a new user
+
 	public function register()
 	{
 		$this->load->helper("form");
 		$this->load->view("register");
 	}
 
-	// Handles form submission for creating a new user
 	public function store()
 	{
 		$this->load->library("form_validation");
 		$this->load->helper("form");
 
-		// Set validation rules
 		$this->form_validation->set_rules(
 			"name",
 			"Name",
@@ -87,7 +85,7 @@ class User extends CI_Controller
 		if ($this->form_validation->run() == false) {
 			$this->load->view("register");
 		} else {
-			// Get form data
+
 			$name = $this->input->post("name");
 			$email = $this->input->post("email");
 			$password = $this->input->post("password");
@@ -97,7 +95,6 @@ class User extends CI_Controller
 			$gender = $this->input->post("gender");
 			$dob = $this->input->post("dob");
 
-			// Save user data
 			$data = [
 				"name" => $name,
 				"email" => $email,
@@ -112,6 +109,8 @@ class User extends CI_Controller
 			$result = $this->User_model->insert_user($data);
 
 			if ($result) {
+				$user = $this->User_model->get_user_by_email($email);
+
 				$newdata = [
 				"user_id" => $user->id,
 				"username" => $user->name,
@@ -149,17 +148,14 @@ class User extends CI_Controller
 		$email = $this->input->post("email");
 		$password = $this->input->post("password");
 
-		// Check if user exists with this email
 		$user = $this->User_model->get_user_by_email($email);
 
-		// Check if user exists and verify password
 		if (!$user || !password_verify($password, $user->password)) {
 			$data["validation_errors"] = ["password" => "Invalid Credentials"];
 			$data["email"] = $email;
 			$this->load->view("login", $data);
 			return;
 		} else {
-			// Login successful
 			$newdata = [
 				"user_id" => $user->id,
 				"username" => $user->name,
@@ -175,7 +171,6 @@ class User extends CI_Controller
 		}
 	}
 
-	// Shows the form to edit an existing user
 	public function edit($id)
 	{
 		$this->load->helper("form");
@@ -184,7 +179,6 @@ class User extends CI_Controller
 		$this->load->view("edit", $data);
 	}
 
-	// Handles form submission for updating a user
 	public function update($id)
 	{
 		$this->load->library("form_validation");
@@ -219,7 +213,6 @@ class User extends CI_Controller
 		}
 	}
 
-	// Deletes a user by ID
 	public function delete($id)
 	{
 		$this->User_model->delete_user($id);
