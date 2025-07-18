@@ -10,22 +10,19 @@ class StudentController extends CI_Controller {
     }
 
 public function profile($user_id = null) {
-    // Authentication check
     $logged_in_user = $this->session->userdata('user_id');
     if (!$logged_in_user) {
         redirect('login');
     }
     
-    $user_id = $logged_in_user; // Use logged-in user's ID
+    $user_id = $logged_in_user; 
 
-    // Handle form submission
     if ($this->input->post()) {
         $this->form_validation->set_rules('roll_no', 'Roll No', 'required|max_length[20]');
         $this->form_validation->set_rules('section', 'Section', 'required|max_length[10]');
         $this->form_validation->set_rules('class', 'Class', 'required|max_length[20]');
 
         if ($this->form_validation->run()) {
-            // Validation passed - update profile
             $update_data = [
                 'roll_no' => $this->input->post('roll_no'),
                 'section' => $this->input->post('section'),
@@ -39,12 +36,12 @@ public function profile($user_id = null) {
             }
             redirect('student/profile');
         }
-        // If validation fails, it will continue to load the view with errors
+
     }
 
-    // Load student data
+
     $data['user'] = $this->StudentModel->get_student_by_user_id($user_id);
-    $data['validation'] = $this->form_validation; // Pass validation to view
+    $data['validation'] = $this->form_validation;
     
     $this->load->view('student/profile', $data);
 }
