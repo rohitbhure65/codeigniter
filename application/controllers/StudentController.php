@@ -57,6 +57,6 @@ public function profile($user_id = null) {
             return;
         }
         $insert_id = $this->StudentModel->create_student($user_id);
-        redirect('student/profile');
+        redirect('index');
     }
 }
