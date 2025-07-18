@@ -40,10 +40,6 @@ class Marks extends CI_Controller {
         $this->form_validation->set_rules('sst', 'SST', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
 
         $student = $this->MarksModel->get_user($roll_no);
-        
-        if (!$student) {
-            show_error('Student not found', 404);
-        }
 
         if ($this->form_validation->run() == FALSE) {
             $data['user'] = $student;
@@ -66,7 +62,6 @@ class Marks extends CI_Controller {
                 $this->MarksModel->insert_marks($data);
                 $this->session->set_flashdata('success', 'Marks added successfully');
             }
-
             redirect('marks');
         }
     }
