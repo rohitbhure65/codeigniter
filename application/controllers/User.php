@@ -112,6 +112,9 @@ class User extends CI_Controller
 			$result = $this->User_model->insert_user($data);
 
 			if ($result) {
+				// Fetch the inserted user by email
+				$user = $this->User_model->get_user_by_email($email);
+
 				$newdata = [
 				"user_id" => $user->id,
 				"username" => $user->name,
