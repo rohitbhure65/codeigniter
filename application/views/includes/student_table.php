@@ -8,6 +8,19 @@ $marks_filter = $this->input->get('marks') ?? '';
 $sort_order = $this->input->get('sort') ?? '';
 ?>
 
+<?php if (!empty($this->session->userdata("username"))): ?>
+    <div class="flex justify-center items-center bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-6 py-4 shadow-md mb-6">
+        <h2 class="text-xl font-semibold">
+            Welcome, <?= htmlspecialchars($this->session->userdata("username")) ?>
+            <span class="text-base font-normal opacity-90">(<?= htmlspecialchars($this->session->userdata("role")) ?>)</span>
+        </h2>
+    </div>
+<?php endif; ?>
+
+<div class="text-4xl font-extrabold mb-6 text-center drop-shadow-lg tracking-wide">
+    ADMIN DASHBOARD
+</div>
+
 <div class="w-full max-w-full px-4 py-6 bg-white rounded-lg shadow-md mb-6">
     <form method="get" action="" class="flex flex-wrap gap-4 items-end">
         <div>
