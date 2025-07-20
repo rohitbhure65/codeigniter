@@ -12,6 +12,19 @@ $user = isset($user) ? $user : null;
 <body class="bg-gray-50 font-sans min-h-screen flex flex-col items-center py-10">
     <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Student Profile Form</h2>
+
+        <?php if ($this->session->flashdata('error')): ?>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" role="alert">
+                <span class="block sm:inline"><?php echo $this->session->flashdata('error'); ?></span>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($this->session->flashdata('success')): ?>
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4" role="alert">
+                <span class="block sm:inline"><?php echo $this->session->flashdata('success'); ?></span>
+            </div>
+        <?php endif; ?>
+
         <form method="post" action="<?php echo site_url('student/create'); ?>" class="flex flex-col gap-4">
 
             <div>

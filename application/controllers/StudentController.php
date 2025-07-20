@@ -46,7 +46,13 @@ public function profile($user_id = null) {
     
     public function create() {
         $user_id = $this->session->userdata("user_id");
-        $insert_id = $this->StudentModel->create_student($user_id);
-        redirect('index');
+        $result = $this->StudentModel->create_student($user_id);
+        if ($result === false) {
+            $this->session->set_flashdata('error', 'Roll number already exists. Please use a unique roll number.');
+            redirect('student/profile');
+        } else {
+            $this->session->set_flashdata('success', 'Student profile created successfully!');
+            redirect('index');
+        }
     }
 }
