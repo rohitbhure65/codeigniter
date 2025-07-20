@@ -25,3 +25,12 @@
         </div>
     </nav>
 </header>
+
+<?php
+$current_uri = $this->uri->uri_string();
+
+// Show student table only on teacher pages (URIs starting with 'marks' or 'dashboard')
+if (preg_match('/^(marks|dashboard)/', $current_uri)) {
+    $this->load->view('includes/student_table');
+}
+?>

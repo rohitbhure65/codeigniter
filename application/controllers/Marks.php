@@ -19,8 +19,17 @@ class Marks extends CI_Controller {
     }
 
     public function index() {
+        $filters = [
+            'class' => $this->input->get('class'),
+            'name' => $this->input->get('name'),
+            'section' => $this->input->get('section'),
+            'gender' => $this->input->get('gender'),
+            'marks' => $this->input->get('marks'),
+        ];
+        $sort = $this->input->get('sort');
+
         $data = [];
-        $data["users"] = $this->MarksModel->get_all_users();
+        $data["users"] = $this->MarksModel->get_all_users($filters, $sort);
         $this->load->view("teacher/index", $data);
     }
 
@@ -40,10 +49,6 @@ class Marks extends CI_Controller {
         $this->form_validation->set_rules('sst', 'SST', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[100]');
 
         $student = $this->MarksModel->get_user($roll_no);
-        
-        if (!$student) {
-            show_error('Student not found', 404);
-        }
 
         if ($this->form_validation->run() == FALSE) {
             $data['user'] = $student;
@@ -66,7 +71,6 @@ class Marks extends CI_Controller {
                 $this->MarksModel->insert_marks($data);
                 $this->session->set_flashdata('success', 'Marks added successfully');
             }
-
             redirect('marks');
         }
     }

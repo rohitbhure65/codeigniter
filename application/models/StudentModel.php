@@ -7,10 +7,20 @@ class StudentModel extends CI_Model {
         return $this->db->insert('marks', $data);
     }
 
+    public function roll_no_exists($roll_no) {
+        $this->db->where('roll_no', $roll_no);
+        $query = $this->db->get('students');
+        return $query->num_rows() > 0;
+    }
+
     public function create_student() {
+        $roll_no = $this->input->post('roll_no');
+        if ($this->roll_no_exists($roll_no)) {
+            return false; // Duplicate roll number
+        }
         $data = [
             'user_id' => $this->session->userdata("user_id"),
-            'roll_no' => $this->input->post('roll_no'),
+            'roll_no' => $roll_no,
             'section' => $this->input->post('section'),
             'class' => $this->input->post('class')
         ];

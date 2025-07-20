@@ -14,7 +14,6 @@ public function profile($user_id = null) {
     if (!$logged_in_user) {
         redirect('login');
     }
-    
     $user_id = $logged_in_user; 
 
     if ($this->input->post()) {
@@ -39,7 +38,6 @@ public function profile($user_id = null) {
 
     }
 
-
     $data['user'] = $this->StudentModel->get_student_by_user_id($user_id);
     $data['validation'] = $this->form_validation;
     
@@ -48,12 +46,13 @@ public function profile($user_id = null) {
     
     public function create() {
         $user_id = $this->session->userdata("user_id");
-        if (!$user_id) {
-            $this->session->set_flashdata('error', 'User ID not found in session');
+        $result = $this->StudentModel->create_student($user_id);
+        if ($result === false) {
+            $this->session->set_flashdata('error', 'Roll number already exists. Please use a unique roll number.');
             redirect('student/profile');
-            return;
+        } else {
+            $this->session->set_flashdata('success', 'Student profile created successfully!');
+            redirect('index');
         }
-        $insert_id = $this->StudentModel->create_student($user_id);
-        redirect('index');
     }
 }
