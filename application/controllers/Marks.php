@@ -19,8 +19,17 @@ class Marks extends CI_Controller {
     }
 
     public function index() {
+        $filters = [
+            'class' => $this->input->get('class'),
+            'name' => $this->input->get('name'),
+            'section' => $this->input->get('section'),
+            'gender' => $this->input->get('gender'),
+            'marks' => $this->input->get('marks'),
+        ];
+        $sort = $this->input->get('sort');
+
         $data = [];
-        $data["users"] = $this->MarksModel->get_all_users();
+        $data["users"] = $this->MarksModel->get_all_users($filters, $sort);
         $this->load->view("teacher/index", $data);
     }
 
