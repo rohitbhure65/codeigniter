@@ -25,15 +25,15 @@ $sort_order = $this->input->get('sort') ?? '';
     <form method="get" action="" class="flex flex-wrap gap-4 items-end">
         <div>
             <label for="class" class="block text-sm font-medium text-gray-700">Class</label>
-            <input type="text" name="class" id="class" value="<?= htmlspecialchars($class_filter) ?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+            <input class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" type="text" name="class" id="class" value="<?= htmlspecialchars($class_filter) ?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
         </div>
         <div>
             <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-            <input type="text" name="name" id="name" value="<?= htmlspecialchars($name_filter) ?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+            <input class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" type="text" name="name" id="name" value="<?= htmlspecialchars($name_filter) ?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
         </div>
         <div>
             <label for="section" class="block text-sm font-medium text-gray-700">Section</label>
-            <input type="text" name="section" id="section" value="<?= htmlspecialchars($section_filter) ?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+            <input class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" type="text" name="section" id="section" value="<?= htmlspecialchars($section_filter) ?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
         </div>
         <div>
             <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
@@ -46,7 +46,7 @@ $sort_order = $this->input->get('sort') ?? '';
         </div>
         <div>
             <label for="marks" class="block text-sm font-medium text-gray-700">Minimum Total Marks</label>
-            <input type="number" name="marks" id="marks" min="0" max="500" value="<?= htmlspecialchars($marks_filter) ?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+            <input class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" type="number" name="marks" id="marks" min="0" max="500" value="<?= htmlspecialchars($marks_filter) ?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
         </div>
         <div>
             <label for="sort" class="block text-sm font-medium text-gray-700">Sort by Marks</label>

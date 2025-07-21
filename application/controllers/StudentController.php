@@ -44,15 +44,28 @@ public function profile($user_id = null) {
     $this->load->view('student/profile', $data);
 }
     
-    public function create() {
-        $user_id = $this->session->userdata("user_id");
-        $result = $this->StudentModel->create_student($user_id);
-        if ($result === false) {
-            $this->session->set_flashdata('error', 'Roll number already exists. Please use a unique roll number.');
-            redirect('student/profile');
+public function create() {
+    if ($this->input->post()) {
+        $this->form_validation->set_rules('roll_no', 'Roll No', 'required|max_length[20]');
+        $this->form_validation->set_rules('section', 'Section', 'required|max_length[10]');
+        $this->form_validation->set_rules('class', 'Class', 'required|max_length[20]');
+
+        if ($this->form_validation->run()) {
+            $user_id = $this->session->userdata("user_id");
+            $result = $this->StudentModel->create_student();
+            if ($result === false) {
+                $this->session->set_flashdata('error', 'Roll number already exists. Please use a unique roll number.');
+                redirect('student/profile');
+            } else {
+                $this->session->set_flashdata('success', 'Student profile created successfully!');
+                redirect('index');
+            }
         } else {
-            $this->session->set_flashdata('success', 'Student profile created successfully!');
-            redirect('index');
+            $this->session->set_flashdata('error', validation_errors());
+            redirect('student/profile');
         }
+    } else {
+        redirect('student/profile');
     }
+}
 }

@@ -30,7 +30,7 @@ class MarksModel extends CI_Model {
         $this->db->where('u.role', 'student');
 
         if (!empty($filters['class'])) {
-            $this->db->like('st.class', $filters['class']);
+            $this->db->where('st.class', $filters['class']);
         }
         if (!empty($filters['name'])) {
             $this->db->like('u.name', $filters['name']);
